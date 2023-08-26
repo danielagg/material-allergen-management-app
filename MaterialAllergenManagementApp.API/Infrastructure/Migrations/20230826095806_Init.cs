@@ -3,7 +3,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 #nullable disable
 
-namespace MaterialAllergenManagementApp.API.Infrastructure.EntityFramework.Migrations
+namespace MaterialAllergenManagementApp.API.Infrastructure.Migrations
 {
     /// <inheritdoc />
     public partial class Init : Migration

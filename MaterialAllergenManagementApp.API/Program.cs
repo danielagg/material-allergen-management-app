@@ -1,11 +1,7 @@
-using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Identity;
-using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
-using Microsoft.AspNetCore.Routing;
 using Microsoft.EntityFrameworkCore;
-using Microsoft.Extensions.DependencyInjection;
-using Microsoft.Extensions.Hosting;
 using MaterialAllergenManagementApp.Users;
+using MaterialAllergenManagementApp.Infrastructure;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -45,12 +41,3 @@ using (var scope = app.Services.CreateScope())
 }
 
 app.Run();
-
-// todo: move to proper Infra folder
-class AuthenticatedUserDbContext : IdentityDbContext<AuthenticatedUser>
-{
-    public AuthenticatedUserDbContext(DbContextOptions<AuthenticatedUserDbContext> options) : base(options)
-    {
-
-    }
-}

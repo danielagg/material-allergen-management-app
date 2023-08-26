@@ -2,19 +2,17 @@
 using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
-using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
+using MaterialAllergenManagementApp.Infrastructure;
 
 #nullable disable
 
-namespace MaterialAllergenManagementApp.API.Infrastructure.EntityFramework.Migrations
+namespace MaterialAllergenManagementApp.API.Infrastructure.Migrations
 {
     [DbContext(typeof(AuthenticatedUserDbContext))]
-    [Migration("20230826095806_Init")]
-    partial class Init
+    partial class AuthenticatedUserDbContextModelSnapshot : ModelSnapshot
     {
-        /// <inheritdoc />
-        protected override void BuildTargetModel(ModelBuilder modelBuilder)
+        protected override void BuildModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder.HasAnnotation("ProductVersion", "8.0.0-preview.2.23128.3");
