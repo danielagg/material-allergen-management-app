@@ -38,6 +38,12 @@ app.MapControllers();
 
 app.MapIdentityApi<AuthenticatedUser>();
 
+using (var scope = app.Services.CreateScope())
+{
+    var dbContext = scope.ServiceProvider.GetRequiredService<AuthenticatedUserDbContext>();
+    dbContext.Database.Migrate();
+}
+
 app.Run();
 
 // todo: move to proper Infra folder
