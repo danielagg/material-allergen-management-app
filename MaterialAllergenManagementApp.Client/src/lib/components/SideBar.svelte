@@ -3,14 +3,14 @@
 	import { AppRail, AppRailTile, AppRailAnchor } from '@skeletonlabs/skeleton';
 	import { page } from '$app/stores';
 
-	let currentRailCategory: '/allergens' | '/inventory' | '/statistics' | '/settings' = '/allergens';
+	let currentRailCategory: '/' | '/inventory' | '/statistics' | '/settings' = '/';
 
 	page.subscribe((page) => {
 		// ex: /basePath/...
 		let basePath: string = page.url.pathname.split('/')[1];
 		if (!basePath) return;
 		// Translate base path to link section
-		if ('allergens' == basePath) currentRailCategory = '/allergens';
+		if ('' == basePath) currentRailCategory = '/';
 		if ('inventory' == basePath) currentRailCategory = '/inventory';
 		if ('statistics' == basePath) currentRailCategory = '/statistics';
 		if ('settings' == basePath) currentRailCategory = '/settings';
@@ -18,9 +18,9 @@
 </script>
 
 <AppRail class="border-r border-surface-500">
-	<AppRailTile bind:group={currentRailCategory} name="tile-2" value={'/allergens'} title="tile-2">
+	<AppRailTile bind:group={currentRailCategory} name="tile-2" value={'/'} title="tile-2">
 		<svelte:fragment slot="lead">
-			<a href="/allergens" data-sveltekit-preload-data="hover">
+			<a href="/" data-sveltekit-preload-data="hover">
 				<div class="flex justify-center">
 					<Icon icon="mdi:gluten" style="font-size: 28px" />
 				</div>
