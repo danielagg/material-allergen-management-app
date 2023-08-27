@@ -107,16 +107,6 @@
 			<button
 				type="button"
 				class="btn variant-filled"
-				on:click={() => drawerStore.open(drawerSettings)}
-			>
-				<span>
-					<Icon icon="ion:filter" style="font-size: 24px" />
-				</span>
-				<span>Filters</span>
-			</button>
-			<button
-				type="button"
-				class="btn variant-filled"
 				on:click={() => modalStore.trigger(modal)}
 			>
 				<span>

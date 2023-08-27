@@ -7,15 +7,12 @@
 	// Floating UI for Popups
 	import { computePosition, autoUpdate, flip, shift, offset, arrow } from '@floating-ui/dom';
 	import { storePopup } from '@skeletonlabs/skeleton';
-	import FiltersSwitch from '$lib/components/FiltersSwitch.svelte';
 
 	storePopup.set({ computePosition, autoUpdate, flip, shift, offset, arrow }); // popup
 	initializeStores(); // drawers
 </script>
 
-<Drawer>
-	<FiltersSwitch />
-</Drawer>
+<Drawer />
 
 <Modal />
 

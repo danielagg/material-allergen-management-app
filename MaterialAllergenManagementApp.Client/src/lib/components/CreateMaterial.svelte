@@ -16,7 +16,7 @@
                 <div class="w-1/2">
                     <label class="label">
                         <span>ID</span>
-                        <input class="input" type="text" value={id} on:input={(e) => {
+                        <input autofocus class="input" type="text" value={id} on:input={(e) => {
                             id = e.currentTarget.value
                         }} placeholder="The ID of the material" />
                     </label>                    
