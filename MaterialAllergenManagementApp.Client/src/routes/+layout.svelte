@@ -12,6 +12,8 @@
 	initializeStores(); // drawers
 </script>
 
+<svelte:head><title>Material Manager</title></svelte:head>
+
 <Drawer />
 
 <Modal />
