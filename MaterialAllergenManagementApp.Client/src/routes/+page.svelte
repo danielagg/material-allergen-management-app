@@ -1,22 +1,34 @@
 <script lang="ts">
-	import { getDrawerStore } from '@skeletonlabs/skeleton';
+	import { getDrawerStore, getModalStore } from '@skeletonlabs/skeleton';
 	import Icon from '@iconify/svelte';
 	import { Table } from '@skeletonlabs/skeleton';
-	import type { DrawerSettings, TableSource } from '@skeletonlabs/skeleton';
+	import type { DrawerSettings, ModalComponent, ModalSettings, TableSource } from '@skeletonlabs/skeleton';
 	import { tableMapperValues } from '@skeletonlabs/skeleton';
 	import { Paginator } from '@skeletonlabs/skeleton';
-	// import { getDrawerStore } from '@skeletonlabs/skeleton';
+	import FilterTypes from '$lib/filterTypes';
+	import CreateMaterial from '$lib/components/CreateMaterial.svelte';
 
 	const drawerStore = getDrawerStore();
-	const drawerSettings: DrawerSettings = {
-		id: 'allergen-filters',
-		// bgBackdrop: 'bg-gradient-to-tr from-indigo-500/50 via-purple-500/50 to-pink-500/50',
-		bgBackdrop: 'bg-gradient-to-tr from-primary-500/50 via-tertiary-500/50 to-secondary-500/50',
+	const modalStore = getModalStore();
 
+	const drawerSettings: DrawerSettings = {
+		id: FilterTypes.Allergen,
+		bgBackdrop: 'bg-gradient-to-tr from-primary-500/50 via-tertiary-500/50 to-secondary-500/50',
 		width: 'w-[600px]',
 		padding: 'p-4',
 		rounded: 'rounded-xl',
 		position: 'right'
+	};
+
+	const modalComponent: ModalComponent = {
+		ref: CreateMaterial,
+		props: { background: 'bg-red-500' },
+		slot: '<p>Skeleton</p>'
+	};
+
+	const modal: ModalSettings = {
+		type: 'component',
+		component: modalComponent,
 	};
 
 	const sourceData = [
@@ -87,7 +99,7 @@
 <div class="container h-full mx-auto flex">
 	<div class="flex flex-col py-4 w-full">
 		<h2 class="h2 mt-6 font-bold">Allergen Management</h2>
-		<p class="w-2/3 mt-2 text-sm opacity-60">
+		<p class="mt-2 w-2/3 text-sm opacity-60">
 			Use this page to manage the allergen classification of each material.
 		</p>
 		<div class="mt-6 flex justify-between items-center space-x-2">
@@ -101,6 +113,16 @@
 					<Icon icon="ion:filter" style="font-size: 24px" />
 				</span>
 				<span>Filters</span>
+			</button>
+			<button
+				type="button"
+				class="btn variant-filled"
+				on:click={() => modalStore.trigger(modal)}
+			>
+				<span>
+					<Icon icon="material-symbols:add" style="font-size: 24px" />
+				</span>
+				<span>Create New Material</span>
 			</button>
 		</div>
 		<Table
