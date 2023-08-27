@@ -1,0 +1,1 @@
+<div>Current stock</div>
