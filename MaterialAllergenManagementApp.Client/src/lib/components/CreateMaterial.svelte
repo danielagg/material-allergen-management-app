@@ -5,8 +5,8 @@
 	import CurrentStockStep from './create-new-material-steps/CurrentStockStep.svelte';
 	import SummaryStep from './create-new-material-steps/SummaryStep.svelte';
 
-	let id: string = 'dsa';
-	let name: string = 'asd';
+	let id: string = '';
+	let name: string = '';
 	let materialType: string = 'Food';
 	let unitOfMeasure: string = 'Kilogram';
 	let isAllergenByNature: boolean = false;
