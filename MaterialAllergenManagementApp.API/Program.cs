@@ -38,8 +38,11 @@ app.MapIdentityApi<AuthenticatedUser>();
 
 using (var scope = app.Services.CreateScope())
 {
-    var dbContext = scope.ServiceProvider.GetRequiredService<AuthenticatedUserDbContext>();
-    dbContext.Database.Migrate();
+    var authenticationDbContext = scope.ServiceProvider.GetRequiredService<AuthenticatedUserDbContext>();
+    var allergensDbContext = scope.ServiceProvider.GetRequiredService<AllergensDbContext>();
+
+    authenticationDbContext.Database.Migrate();
+    allergensDbContext.Database.Migrate();
 }
 
 app.Run();
