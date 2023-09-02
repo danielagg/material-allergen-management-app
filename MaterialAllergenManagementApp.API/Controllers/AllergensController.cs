@@ -2,6 +2,7 @@ using Microsoft.AspNetCore.Mvc;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Authorization;
 using MaterialAllergenManagementApp.Allergens;
+using MaterialAllergenManagementApp.Allergens.DTOs;
 
 namespace MaterialAllergenManagementApp.Controllers;
 
@@ -34,4 +35,16 @@ public class AllergensController : ControllerBase
         var result = await _appService.GetDetailsAsync(id);
         return Ok(result);
     }
+
+    [HttpPost]
+    public async Task<IActionResult> CreateNewMaterial([FromBody] CreateNewMaterialDto data)
+    {
+        var result = await _appService.CreateNewMaterialAllergenAsync(
+            data.MaterialId,
+            data.MaterialName,
+            data.AllergenByNature,
+            data.AllergenByCrossContamination);
+
+        return Ok(result);
+    }    
 }
