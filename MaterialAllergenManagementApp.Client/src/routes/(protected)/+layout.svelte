@@ -1,5 +1,5 @@
 <script lang="ts">
-	import '../app.postcss';
+	import '../../app.postcss';
 	import { AppShell, Drawer, Modal, initializeStores } from '@skeletonlabs/skeleton';
 	import TopBar from '$lib/components/TopBar.svelte';
 	import SideBar from '$lib/components/SideBar.svelte';
