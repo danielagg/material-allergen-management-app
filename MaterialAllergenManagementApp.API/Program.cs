@@ -2,6 +2,7 @@ using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using MaterialAllergenManagementApp.Users;
 using MaterialAllergenManagementApp.Infrastructure;
+using MaterialAllergenManagementApp.Allergens.Infrastructure;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -9,6 +10,8 @@ builder.Services.AddControllers();
 
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
+
+builder.Services.RegisterDependencyInjections();
 
 builder.Services.AddAuthentication().AddBearerToken(IdentityConstants.BearerScheme);
 builder.Services.AddAuthorizationBuilder();
@@ -18,7 +21,6 @@ builder.Services.AddDbContext<AuthenticatedUserDbContext>(x => x.UseSqlite("Data
 builder.Services.AddIdentityCore<AuthenticatedUser>()
     .AddEntityFrameworkStores<AuthenticatedUserDbContext>()
     .AddApiEndpoints();
-
 
 var app = builder.Build();
 
