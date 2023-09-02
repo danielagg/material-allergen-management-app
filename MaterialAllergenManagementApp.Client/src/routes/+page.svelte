@@ -27,7 +27,7 @@
 
 	const modalComponent: ModalComponent = {
 		ref: CreateMaterial,
-		props: { background: 'bg-red-500' },
+		props: { background: 'bg-red-500', blur: '1000' },
 		slot: '<p>Skeleton</p>'
 	};
 

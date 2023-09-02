@@ -23,7 +23,12 @@
     </ItemGroup>
 
     <ItemGroup>
+      <ProjectReference Include="..\MaterialAllergenManagementApp.Users\MaterialAllergenManagementApp.Shared.csproj" />
       <ProjectReference Include="..\MaterialAllergenManagementApp.Users\MaterialAllergenManagementApp.Users.csproj" />
+      <ProjectReference Include="..\MaterialAllergenManagementApp.Users\MaterialAllergenManagementApp.Allergens.csproj" />
+      <ProjectReference Include="..\MaterialAllergenManagementApp.Shared\MaterialAllergenManagementApp.Shared.csproj" />
+      <ProjectReference Include="..\MaterialAllergenManagementApp.Allergens\MaterialAllergenManagementApp.Allergens.csproj" />
+      
     </ItemGroup>
 
 </Project>
