@@ -31,5 +31,9 @@ public class MaterialAllergenAggregate : Entity
         string materialName,
         bool allergenByNature,
         bool allergenByCrossContamination
-    ) => new(materialId, materialName, allergenByNature, allergenByCrossContamination);
+    )
+    {
+        // todo: validation
+        return new(materialId, materialName, allergenByNature, allergenByCrossContamination);
+    }
 }
