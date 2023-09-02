@@ -1,0 +1,2 @@
+set -ex
+ASPNETCORE_ENVIRONMENT=Development dotnet ef migrations add $1 -c MaterialAllergenManagementApp.Allergens.Infrastructure.AllergensDbContext --project ../MaterialAllergenManagementApp.Allergens.csproj --startup-project ../../MaterialAllergenManagementApp.API -o Infrastructure/DatabaseMigrations
