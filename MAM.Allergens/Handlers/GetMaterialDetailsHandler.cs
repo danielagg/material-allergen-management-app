@@ -18,7 +18,10 @@ public class GetMaterialDetailsHandler : IRequestHandler<GetMaterialDetailsQuery
     public async Task<MaterialAllergenDetailsDto> Handle(GetMaterialDetailsQuery request, CancellationToken cancellationToken)
     {
         // todo: proper error handling
-        var entity = await _dbContext.Materials.SingleAsync(x => x.Id == request.Id);
+        var entity = await _dbContext.Materials
+            .Include(x => x.Type)
+            .SingleAsync(x => x.Id == request.Id);
+            
         return new(entity);
     }
 }

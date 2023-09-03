@@ -8,13 +8,15 @@ public record MaterialAllergenMainListDto(
     string Id,
     DateTime CreatedOn,
     IdNameModel<string> Material,
-    List<string> AllergensByNature,
-    List<string> AllergensByCrossContamination)
+    bool HasAllergensByNature,
+    bool HasAllergensByCrossContamination,
+    string MaterialType)
 {
     public MaterialAllergenMainListDto(Material material) : this(
         material.Id,
         material.CreatedOn,
         material.Identification,
-        material.AllergensByNature.Allergens.Select(a => a.Name).ToList(),
-        material.AllergensByCrossContamination.Allergens.Select(a => a.Name).ToList()) { }
+        material.AllergensByNature.Allergens.Any(),
+        material.AllergensByCrossContamination.Allergens.Any(),
+        material.Type.Name) { }
 }

@@ -13,6 +13,8 @@
 	import FilterTypes from '$lib/filterTypes';
 	import CreateMaterial from '$lib/components/CreateMaterial.svelte';
 
+	export let data;
+
 	const drawerStore = getDrawerStore();
 	const modalStore = getModalStore();
 
@@ -42,100 +44,19 @@
 		day: 'numeric'
 	};
 
-	enum MaterialAvailability {
-		Available,
-		LimitedAvailability,
-		BackOrder,
-		Unavailable
-	}
-
-	const formatMaterialAvailability = (value: MaterialAvailability) => {
-		switch (value) {
-			case MaterialAvailability.Available:
-				return 'Available';
-			case MaterialAvailability.LimitedAvailability:
-				return 'Limited Availability';
-			case MaterialAvailability.BackOrder:
-				return 'Back Order';
-			case MaterialAvailability.Unavailable:
-				return 'Unavailable';
-			default:
-				return 'N/A';
-		}
-	};
-
-	const sourceData = [
-		{
-			position: 1,
-			id: 'R10000000562943',
-			type: 'Food',
-			name: 'All-purpose flour',
-			unitOfMeasure: 'Kilogram',
-			currentStock: 1500,
-			availability: MaterialAvailability.Available,
-			createdOn: '2023-08-16T13:23:50.0649867'
-		}
-		// {
-		// 	position: 2,
-		// 	id: 'P10000001279912',
-		// 	type: 'Perishable',
-		// 	name: 'Helium',
-		// 	createdOn: '2023-07-18T13:23:50.0649867'
-		// },
-		// {
-		// 	position: 3,
-		// 	id: 'R10000000499901',
-		// 	type: 'Beverage',
-		// 	name: 'Lithium'
-		// },
-		// {
-		// 	position: 4,
-		// 	id: 'R10000000499899',
-		// 	type: 'Finished Product',
-		// 	name: 'Beryllium'
-		// },
-		// {
-		// 	position: 5,
-		// 	id: 'P10000001198112',
-		// 	type: 'Simple Packaging Material',
-		// 	name: 'Boron'
-		// },
-		// {
-		// 	position: 6,
-		// 	id: 'P10000001135292',
-		// 	type: 'Simple Packaging Material',
-		// 	name: 'Boron'
-		// },
-		// {
-		// 	position: 7,
-		// 	id: 'P10000001098812',
-		// 	type: 'Manufacturer Part',
-		// 	name: 'Boron'
-		// },
-		// {
-		// 	position: 7,
-		// 	id: 'R10000000312899',
-		// 	type: 'Finished Product',
-		// 	name: 'Boron'
-		// }
-	];
-
 	const tableSimple: TableSource = {
-		// A list of heading labels.
-		head: ['ID', 'Name', 'Type', 'Availability', 'Current Stock', 'Unit of Measure', 'Created On'],
-		// The data visibly shown in your table body UI.
+		head: ['ID', 'Name', 'Type', 'Allergen by Nature?', 'Allergen by Cross Cont.?', 'Created On'],
 		body: tableMapperValues(
-			sourceData.map((s) => ({
-				...s,
-				availability: formatMaterialAvailability(s.availability),
+			data.data.map((s) => ({
+				id: s.material.id,
+				name: s.material.name,
+				type: s.materialType,
+				allergenByNature: s.hasAllergensByNature,
+				allergenByCC: s.hasAllergensByCrossContamination,
 				createdOn: new Date(s.createdOn).toLocaleDateString('en-US', dateOptions)
 			})),
-			['id', 'name', 'type', 'availability', 'currentStock', 'unitOfMeasure', 'createdOn']
+			['id', 'name', 'type', 'allergenByNature', 'allergenByCC', 'createdOn']
 		)
-		// // Optional: The data returned when interactive is enabled and a row is clicked.
-		// meta: tableMapperValues(sourceData, ['position', 'id', 'name', 'symbol', 'weight']),
-		// Optional: A list of footer labels.
-		// foot: ['Total', '', '<code class="code">5</code>']
 	};
 </script>
 

@@ -4,7 +4,7 @@ namespace MAM.Allergens.Domain.MaterialClassification;
 
 public class MaterialType : Entity
 {
-    public string Name { get; }
+    public string Name { get; private set; }
     public List<MaterialCategory> ApplicableFor { get; } = new List<MaterialCategory>();
 
     // for EF

@@ -21,6 +21,7 @@ public class GetMaterialMainListHandler : IRequestHandler<GetMaterialMainListQue
         var totalCount = await _dbContext.Materials.CountAsync();
 
         var result = await _dbContext.Materials
+            .Include(x => x.Type)
             .OrderByDescending(x => x.CreatedOn)
             .Skip(request.Skip)
             .Take(request.Top)
