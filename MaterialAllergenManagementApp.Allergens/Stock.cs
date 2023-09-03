@@ -5,7 +5,7 @@ public class Stock
     public UnitOfMeasure UnitOfMeasure { get; private set; }
     public decimal CurrentAvailableStock { get; private set; }
 
-    // EF Core
+    // for EF
     protected Stock()
     {
         

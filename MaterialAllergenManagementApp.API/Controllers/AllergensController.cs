@@ -6,7 +6,8 @@ using MaterialAllergenManagementApp.Allergens.DTOs;
 
 namespace MaterialAllergenManagementApp.Controllers;
 
-[Authorize]
+// [Authorize]
+[AllowAnonymous]
 [ApiController]
 [Route("/api/allergens")]
 public class AllergensController : ControllerBase
@@ -42,8 +43,12 @@ public class AllergensController : ControllerBase
         var result = await _appService.CreateNewMaterialAllergenAsync(
             data.MaterialId,
             data.MaterialName,
-            data.AllergenByNature,
-            data.AllergenByCrossContamination);
+            data.MaterialTypeId,
+            data.UnitOfMeasureCode,
+            data.UnitOfMeasureName,
+            data.InitialStock,
+            data.AllergensByNature,
+            data.AllergensByCrossContamination);
 
         return Ok(result);
     }    

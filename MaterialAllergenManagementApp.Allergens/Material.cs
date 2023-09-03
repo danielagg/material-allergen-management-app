@@ -6,11 +6,9 @@ public class Material : Entity
 {
     public IdNameModel<string> Identification { get; private set; }
     public MaterialType Type { get; private set; }
-    public bool AllergenByNature { get; private set;}
-    public bool AllergenByCrossContamination { get; private set;}
     public Stock Stock { get; private set; }
-    // public AllergenByNature AllergenByNature { get; private set; }
-    // public AllergenByCrossContamination AllergenByCrossContamination { get; private set; }
+    public AllergenByNature AllergensByNature { get; private set; }
+    public AllergenByCrossContamination AllergensByCrossContamination { get; private set; }
 
     // for EF - todo: double check this, if we still need a param-less ctor for EF
     protected Material()
@@ -21,23 +19,34 @@ public class Material : Entity
     private Material(
         string materialId,
         string materialName,
-        bool allergenByNature,
-        bool allergenByCrossContamination
+        MaterialType materialType,
+        string unitOfMeasureCode,
+        string unitOfMeasureName,
+        decimal initialStock,
+        List<string> allergensByNature,
+        List<string> allergensByCrossContamination
     ) : base()
     {
         Identification = new IdNameModel<string>(materialId, materialName);
-        AllergenByNature = allergenByNature;
-        AllergenByCrossContamination = allergenByCrossContamination;
+        Type = materialType;
+        Stock = Stock.CreateInitialStock(new UnitOfMeasure(unitOfMeasureCode, unitOfMeasureName), initialStock);
+        AllergensByNature = AllergenByNature.Create(allergensByNature.Select(a => new Allergen(a)).ToList());
+        AllergensByCrossContamination = AllergenByCrossContamination.Create(allergensByCrossContamination.Select(a => new Allergen(a)).ToList());
     }
 
     public static Material Create(
         string materialId,
         string materialName,
-        bool allergenByNature,
-        bool allergenByCrossContamination
+        MaterialType materialType,
+        string unitOfMeasureCode,
+        string unitOfMeasureName,
+        decimal initialStock,
+        List<string> allergensByNature,
+        List<string> allergensByCrossContamination
     )
     {
         // todo: validation
-        return new(materialId, materialName, allergenByNature, allergenByCrossContamination);
+        return new(materialId, materialName, materialType, unitOfMeasureCode, unitOfMeasureName, initialStock,
+            allergensByNature, allergensByCrossContamination);
     }
 }

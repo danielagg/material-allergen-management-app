@@ -13,8 +13,12 @@ public interface IMaterialAllergenApplicationService
     Task<MaterialAllergenDetailsDto> CreateNewMaterialAllergenAsync(
         string materialId,
         string materialName,
-        bool allergenByNature,
-        bool allergenByCrossContamination);
+        string materialTypeId,
+        string unitOfMeasureCode,
+        string unitOfMeasureName,
+        decimal initialStock,
+        List<string> allergensByNature,
+        List<string> allergensByCrossContamination);
 }
 
 public class MaterialAllergenApplicationService : IMaterialAllergenApplicationService
@@ -51,10 +55,18 @@ public class MaterialAllergenApplicationService : IMaterialAllergenApplicationSe
     public async Task<MaterialAllergenDetailsDto> CreateNewMaterialAllergenAsync(
         string materialId,
         string materialName,
-        bool allergenByNature,
-        bool allergenByCrossContamination)
+        string materialTypeId,
+        string unitOfMeasureCode,
+        string unitOfMeasureName,
+        decimal initialStock,
+        List<string> allergensByNature,
+        List<string> allergensByCrossContamination)
     {
-        var entity = Material.Create(materialId, materialName, allergenByNature, allergenByCrossContamination);
+        var materialType = await _dbContext.MaterialTypes.SingleAsync(mt => mt.Id == materialTypeId);
+
+        var entity = Material.Create(
+            materialId, materialName, materialType, unitOfMeasureCode, unitOfMeasureName, initialStock,
+            allergensByNature, allergensByCrossContamination);
         
         await _dbContext.Materials.AddAsync(entity);
         await _dbContext.SaveChangesAsync();

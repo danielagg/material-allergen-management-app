@@ -5,5 +5,9 @@ namespace MaterialAllergenManagementApp.Allergens.DTOs;
 public record CreateNewMaterialDto(
     string MaterialId,
     string MaterialName,
-    bool AllergenByNature,
-    bool AllergenByCrossContamination);
+    string MaterialTypeId,
+    string UnitOfMeasureCode,
+    string UnitOfMeasureName,
+    decimal InitialStock,
+    List<string> AllergensByNature,
+    List<string> AllergensByCrossContamination);
