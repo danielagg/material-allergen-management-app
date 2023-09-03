@@ -9,7 +9,7 @@ public class PaginatedResult<T>
     public int Top { get; }
     public int Skip { get; }
 
-    public PaginatedResult(IEnumerable<T> data, int total, int top, int skip)
+    private PaginatedResult(IEnumerable<T> data, int total, int top, int skip)
     {
         Data = data;
         Total = total;
@@ -17,5 +17,5 @@ public class PaginatedResult<T>
         Skip = skip;
     }
 
-    public static PaginatedResult<T> Empty() => new(Enumerable.Empty<T>(), 0, 0, 0);
+    public static PaginatedResult<T> Create(IEnumerable<T> data, int total, int skip) => new(data, total, data.Count(), skip);
 }

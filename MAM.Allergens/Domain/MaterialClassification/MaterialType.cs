@@ -1,6 +1,6 @@
 using MAM.Shared.Domain;
 
-namespace MAM.Allergens;
+namespace MAM.Allergens.Domain.MaterialClassification;
 
 public class MaterialType : Entity
 {

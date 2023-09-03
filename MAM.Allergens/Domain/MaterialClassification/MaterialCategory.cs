@@ -1,4 +1,4 @@
-namespace MAM.Allergens;
+namespace MAM.Allergens.Domain.MaterialClassification;
 
 public enum MaterialCategory
 {

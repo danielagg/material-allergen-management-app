@@ -1,4 +1,5 @@
 using MAM.Shared.Domain;
+using MAM.Allergens.Domain;
 using MAM.Allergens.DTOs;
 using MAM.Allergens.Infrastructure;
 using Microsoft.EntityFrameworkCore;
@@ -42,7 +43,7 @@ public class MaterialAllergenApplicationService : IMaterialAllergenApplicationSe
 
         var dtos = result.Select(x => new MaterialAllergenMainListDto(x));
 
-        return new PaginatedResult<MaterialAllergenMainListDto>(dtos, totalCount, result.Count, skip);
+        return PaginatedResult<MaterialAllergenMainListDto>.Create(dtos, totalCount, skip);
     }
 
     public async Task<MaterialAllergenDetailsDto> GetDetailsAsync(string id)

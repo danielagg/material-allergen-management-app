@@ -1,6 +1,9 @@
 ﻿using MAM.Shared.Domain;
+using MAM.Allergens.Domain.AllergenClassification;
+using MAM.Allergens.Domain.MaterialClassification;
+using MAM.Allergens.Domain.Inventory;
 
-namespace MAM.Allergens;
+namespace MAM.Allergens.Domain;
 
 public class Material : Entity
 {

@@ -1,21 +1,21 @@
-namespace MAM.Allergens;
+namespace MAM.Allergens.Domain.AllergenClassification;
 
-public class AllergenByNature
+public class AllergenByCrossContamination
 {
     public List<Allergen> Allergens { get; private set; }
 
     // for EF
-    protected AllergenByNature()
+    protected AllergenByCrossContamination()
     {
         
     }
 
-    private AllergenByNature(List<Allergen> initialAllergens)
+    private AllergenByCrossContamination(List<Allergen> initialAllergens)
     {
         Allergens = initialAllergens;
     }
 
-    public static AllergenByNature Create(List<Allergen> initialAllergens) => new(initialAllergens);
+    public static AllergenByCrossContamination Create(List<Allergen> initialAllergens) => new(initialAllergens);
 
     public void Add(Allergen allergen)
     {

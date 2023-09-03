@@ -1,4 +1,4 @@
-using MAM.Allergens;
+using MAM.Allergens.Domain;
 using MAM.Shared.Domain;
 
 namespace MAM.Allergens.DTOs;

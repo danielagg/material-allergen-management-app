@@ -1,6 +1,9 @@
 using System.Text.Json;
 using Microsoft.EntityFrameworkCore;
 using MAM.Shared.Domain;
+using MAM.Allergens.Domain;
+using MAM.Allergens.Domain.MaterialClassification;
+using MAM.Allergens.Domain.AllergenClassification;
 
 namespace MAM.Allergens.Infrastructure;
 
