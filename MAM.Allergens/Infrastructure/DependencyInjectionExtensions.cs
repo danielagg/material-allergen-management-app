@@ -12,7 +12,6 @@ public static class DependencyInjectionExtensions
             x.MigrationsHistoryTable("__AllergensEFMigrationsHistory");
         }));
 
-        services.AddScoped<IMaterialAllergenApplicationService, MaterialAllergenApplicationService>();
         return services;
     }
 }

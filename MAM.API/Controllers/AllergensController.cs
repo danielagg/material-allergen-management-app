@@ -2,7 +2,10 @@ using Microsoft.AspNetCore.Mvc;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Authorization;
 using MAM.Allergens;
+using MAM.Allergens.Commands;
+using MAM.Allergens.Queries;
 using MAM.Allergens.DTOs;
+using MediatR;
 
 namespace MAM.Controllers;
 
@@ -12,35 +15,33 @@ namespace MAM.Controllers;
 [Route("/api/allergens")]
 public class AllergensController : ControllerBase
 {
-    private readonly IMaterialAllergenApplicationService _appService;
+    private readonly IMediator _mediator;
     
-    public AllergensController(
-        IMaterialAllergenApplicationService appService
-    )
+    public AllergensController(IMediator mediator)
     {
-        ArgumentNullException.ThrowIfNull(appService);
+        ArgumentNullException.ThrowIfNull(mediator);
 
-        _appService = appService;
+        _mediator = mediator;
     }
 
     [HttpGet]
     public async Task<IActionResult> Get([FromQuery] int? top, [FromQuery] int? skip)
     {
-        var result = await _appService.GetPaginatedMainListAsync(top ?? 10, skip ?? 0);
+        var result = await _mediator.Send(new GetMaterialMainListQuery(top ?? 10, skip ?? 0));
         return Ok(result);
     }
 
     [HttpGet("{id}")]
     public async Task<IActionResult> Get([FromRoute] string id)
     {
-        var result = await _appService.GetDetailsAsync(id);
-        return Ok(result);
+        var material = await _mediator.Send(new GetMaterialDetailsQuery(id));
+        return Ok(material);
     }
 
     [HttpPost]
-    public async Task<IActionResult> CreateNewMaterial([FromBody] CreateNewMaterialDto data)
+    public async Task<IActionResult> CreateNewMaterial([FromBody] CreateNewMaterialRequestDto data)
     {
-        var result = await _appService.CreateNewMaterialAllergenAsync(
+        var material = await _mediator.Send(new CreateNewMaterialCommand(
             data.MaterialId,
             data.MaterialName,
             data.MaterialTypeId,
@@ -48,8 +49,9 @@ public class AllergensController : ControllerBase
             data.UnitOfMeasureName,
             data.InitialStock,
             data.AllergensByNature,
-            data.AllergensByCrossContamination);
+            data.AllergensByCrossContamination
+        ));
 
-        return Ok(result);
+        return Ok(material);
     }    
 }

@@ -2,7 +2,7 @@ using MAM.Allergens;
 
 namespace MAM.Allergens.DTOs;
 
-public record CreateNewMaterialDto(
+public record CreateNewMaterialRequestDto(
     string MaterialId,
     string MaterialName,
     string MaterialTypeId,

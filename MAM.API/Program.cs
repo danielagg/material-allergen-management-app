@@ -3,6 +3,7 @@ using Microsoft.EntityFrameworkCore;
 using MAM.Users;
 using MAM.Infrastructure;
 using MAM.Allergens.Infrastructure;
+using MAM.Allergens.Domain;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -15,6 +16,11 @@ builder.Services.RegisterDependencyInjections();
 
 builder.Services.AddAuthentication().AddBearerToken(IdentityConstants.BearerScheme);
 builder.Services.AddAuthorizationBuilder();
+
+builder.Services.AddMediatR(cfg => {
+    cfg.RegisterServicesFromAssembly(typeof(Program).Assembly);
+    cfg.RegisterServicesFromAssembly(typeof(Material).Assembly);
+});
 
 builder.Services.AddDbContext<AuthenticatedUserDbContext>(x => x.UseSqlite("DataSource=app.db"));
 
