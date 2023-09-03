@@ -28,9 +28,9 @@ public class MaterialAllergenApplicationService : IMaterialAllergenApplicationSe
 
     public async Task<PaginatedResult<MaterialAllergenMainListDto>> GetPaginatedMainListAsync(int top, int skip)
     {
-        var totalCount = await _dbContext.MaterialAllergens.CountAsync();
+        var totalCount = await _dbContext.Materials.CountAsync();
 
-        var result = await _dbContext.MaterialAllergens
+        var result = await _dbContext.Materials
             .OrderByDescending(x => x.CreatedOn)
             .Skip(skip)
             .Take(top)
@@ -44,7 +44,7 @@ public class MaterialAllergenApplicationService : IMaterialAllergenApplicationSe
     public async Task<MaterialAllergenDetailsDto> GetDetailsAsync(string id)
     {
         // todo: proper error handling
-        var entity = await _dbContext.MaterialAllergens.SingleAsync(x => x.Id == id);
+        var entity = await _dbContext.Materials.SingleAsync(x => x.Id == id);
         return new(entity);
     }
 
@@ -54,9 +54,9 @@ public class MaterialAllergenApplicationService : IMaterialAllergenApplicationSe
         bool allergenByNature,
         bool allergenByCrossContamination)
     {
-        var entity = MaterialAllergenAggregate.Create(materialId, materialName, allergenByNature, allergenByCrossContamination);
+        var entity = Material.Create(materialId, materialName, allergenByNature, allergenByCrossContamination);
         
-        await _dbContext.MaterialAllergens.AddAsync(entity);
+        await _dbContext.Materials.AddAsync(entity);
         await _dbContext.SaveChangesAsync();
         
         return new(entity);

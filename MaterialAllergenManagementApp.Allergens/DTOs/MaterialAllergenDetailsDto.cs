@@ -10,10 +10,10 @@ public record MaterialAllergenDetailsDto(
     bool AllergenByNature,
     bool AllergenByCrossContamination)
 {
-    public MaterialAllergenDetailsDto(MaterialAllergenAggregate entity) : this(
-        entity.Id,
-        entity.CreatedOn,
-        entity.Material,
-        entity.AllergenByNature,
-        entity.AllergenByCrossContamination) { }
+    public MaterialAllergenDetailsDto(Material material) : this(
+        material.Id,
+        material.CreatedOn,
+        material.Identification,
+        material.AllergenByNature,
+        material.AllergenByCrossContamination) { }
 }
