@@ -11,8 +11,8 @@ public class CreateNewMaterialCommand : IRequest<MaterialAllergenDetailsDto>
     public string UnitOfMeasureCode { get; }
     public string UnitOfMeasureName { get; }
     public decimal InitialStock { get; }
-    public  List<string> AllergensByNature { get; }
-    public  List<string> AllergensByCrossContamination{ get; }
+    public List<string> AllergensByNature { get; }
+    public List<string> AllergensByCrossContamination{ get; }
 
     public CreateNewMaterialCommand(
         string materialId,
