@@ -9,6 +9,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MAM.Allergens", "MAM.Allerg
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MAM.Shared", "MAM.Shared\MAM.Shared.csproj", "{DC5BB78A-1ACA-4F23-ABEA-A503C5E4E3F3}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MAM.Allergens.UnitTests", "MAM.Allergens.Tests\MAM.Allergens.UnitTests.csproj", "{18909210-B43B-4D06-BA5C-F99B9FB6A299}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -31,5 +33,9 @@ Global
 		{DC5BB78A-1ACA-4F23-ABEA-A503C5E4E3F3}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{DC5BB78A-1ACA-4F23-ABEA-A503C5E4E3F3}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{DC5BB78A-1ACA-4F23-ABEA-A503C5E4E3F3}.Release|Any CPU.Build.0 = Release|Any CPU
+		{18909210-B43B-4D06-BA5C-F99B9FB6A299}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{18909210-B43B-4D06-BA5C-F99B9FB6A299}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{18909210-B43B-4D06-BA5C-F99B9FB6A299}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{18909210-B43B-4D06-BA5C-F99B9FB6A299}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 EndGlobal
