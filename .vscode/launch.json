@@ -9,9 +9,9 @@
       "type": "coreclr",
       "request": "launch",
       "preLaunchTask": "build",
-      "program": "${workspaceFolder}/MaterialAllergenManagementApp.API/bin/Debug/net8.0/MaterialAllergenManagementApp.API.dll",
+      "program": "${workspaceFolder}/MAM.API/bin/Debug/net8.0/MAM.API.dll",
       "args": [],
-      "cwd": "${workspaceFolder}/MaterialAllergenManagementApp.API",
+      "cwd": "${workspaceFolder}/MAM.API",
       "stopAtEntry": false,
       "env": {
         "ASPNETCORE_ENVIRONMENT": "Development"

@@ -1,0 +1,34 @@
+<Project Sdk="Microsoft.NET.Sdk.Web">
+
+    <PropertyGroup>
+        <TargetFramework>net8.0</TargetFramework>
+        <Nullable>enable</Nullable>
+        <ImplicitUsings>enable</ImplicitUsings>
+        <InvariantGlobalization>true</InvariantGlobalization>
+        <DockerDefaultTargetOS>Linux</DockerDefaultTargetOS>
+        <RootNamespace>MaterialAllergenManagementApp</RootNamespace>
+    </PropertyGroup>
+
+    <ItemGroup>
+        <!-- <PackageReference Include="Microsoft.AspNetCore.Identity.EntityFrameworkCore" Version="8.0.0-preview.7.23375.9" />
+        <PackageReference Include="Microsoft.AspNetCore.OpenApi" Version="8.0.0-preview.7.23375.9" />
+        <PackageReference Include="Microsoft.EntityFrameworkCore.Design" Version="8.0.0-preview.7.23375.4" /> 
+        <PackageReference Include="Microsoft.EntityFrameworkCore.Sqlite" Version="8.0.0-preview.7.23375.4" /> -->
+        <PackageReference Include="Microsoft.AspNetCore.Identity.EntityFrameworkCore" Version="8.0.0-preview.1.23112.2" />
+        <PackageReference Include="Microsoft.AspNetCore.OpenApi" Version="8.0.0-preview.1.23112.2" />
+        <PackageReference Include="Microsoft.EntityFrameworkCore.Design" Version="8.0.0-preview.1.23112.2" />
+        <PackageReference Include="Microsoft.EntityFrameworkCore.Sqlite" Version="8.0.0-preview.1.23112.2" />
+        
+        <PackageReference Include="Swashbuckle.AspNetCore" Version="6.5.0" />
+    </ItemGroup>
+
+    <ItemGroup>
+      <ProjectReference Include="..\MAM.Users\MAM.Shared.csproj" />
+      <ProjectReference Include="..\MAM.Users\MAM.Users.csproj" />
+      <ProjectReference Include="..\MAM.Users\MAM.Allergens.csproj" />
+      <ProjectReference Include="..\MAM.Shared\MAM.Shared.csproj" />
+      <ProjectReference Include="..\MAM.Allergens\MAM.Allergens.csproj" />
+      
+    </ItemGroup>
+
+</Project>

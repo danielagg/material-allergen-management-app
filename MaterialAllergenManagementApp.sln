@@ -1,13 +1,13 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # 
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MaterialAllergenManagementApp.API", "MaterialAllergenManagementApp.API\MaterialAllergenManagementApp.API.csproj", "{231F51E4-C512-4777-8452-5039C7686901}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MAM.API", "MAM.API\MAM.API.csproj", "{231F51E4-C512-4777-8452-5039C7686901}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MaterialAllergenManagementApp.Users", "MaterialAllergenManagementApp.Users\MaterialAllergenManagementApp.Users.csproj", "{7CB43D16-9AEC-49A1-B62A-798E7B007B6E}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MAM.Users", "MAM.Users\MAM.Users.csproj", "{7CB43D16-9AEC-49A1-B62A-798E7B007B6E}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MaterialAllergenManagementApp.Allergens", "MaterialAllergenManagementApp.Allergens\MaterialAllergenManagementApp.Allergens.csproj", "{9DBF3D90-5720-40FD-922D-12BC751AB622}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MAM.Allergens", "MAM.Allergens\MAM.Allergens.csproj", "{9DBF3D90-5720-40FD-922D-12BC751AB622}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MaterialAllergenManagementApp.Shared", "MaterialAllergenManagementApp.Shared\MaterialAllergenManagementApp.Shared.csproj", "{DC5BB78A-1ACA-4F23-ABEA-A503C5E4E3F3}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MAM.Shared", "MAM.Shared\MAM.Shared.csproj", "{DC5BB78A-1ACA-4F23-ABEA-A503C5E4E3F3}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
