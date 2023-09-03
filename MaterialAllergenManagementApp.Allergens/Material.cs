@@ -8,7 +8,7 @@ public class Material : Entity
     public MaterialType Type { get; private set; }
     public bool AllergenByNature { get; private set;}
     public bool AllergenByCrossContamination { get; private set;}
-    // public Stock Stock { get; private set; }
+    public Stock Stock { get; private set; }
     // public AllergenByNature AllergenByNature { get; private set; }
     // public AllergenByCrossContamination AllergenByCrossContamination { get; private set; }
 

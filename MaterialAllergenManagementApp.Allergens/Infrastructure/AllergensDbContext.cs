@@ -24,6 +24,9 @@ public class AllergensDbContext : DbContext
                 v => JsonSerializer.Deserialize<IdNameModel<string>>(v, (JsonSerializerOptions)null));
 
             e.HasOne(x => x.Type);
+            e.OwnsOne(x => x.Stock, stock => {
+                stock.OwnsOne(s => s.UnitOfMeasure);
+            });
         });
 
         modelBuilder.Entity<MaterialType>(e =>
