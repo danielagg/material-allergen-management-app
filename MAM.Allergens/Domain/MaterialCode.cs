@@ -25,7 +25,7 @@ public class MaterialCode
         if (code.Length != 6)
             throw new InvalidMaterialCodeException("Material code must be 6 characters long");
 
-        if (!code.StartsWith('P') || !code.StartsWith('R'))
+        if (!code.StartsWith('P') && !code.StartsWith('R'))
             throw new InvalidMaterialCodeException("Material code must start with P or R");
 
         return new(code);
