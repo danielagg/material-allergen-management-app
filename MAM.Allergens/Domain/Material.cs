@@ -2,6 +2,7 @@
 using MAM.Allergens.Domain.AllergenClassification;
 using MAM.Allergens.Domain.MaterialClassification;
 using MAM.Allergens.Domain.Inventory;
+using MAM.Allergens.Domain.Exceptions;
 
 namespace MAM.Allergens.Domain;
 
@@ -48,8 +49,45 @@ public class Material : Entity
         List<string> allergensByCrossContamination
     )
     {
-        // todo: validation
+        AssertInputParameterValidity(materialId, materialName, materialType, unitOfMeasureCode, unitOfMeasureName, initialStock,
+            allergensByNature, allergensByCrossContamination);
+
         return new(materialId, materialName, materialType, unitOfMeasureCode, unitOfMeasureName, initialStock,
             allergensByNature, allergensByCrossContamination);
+    }
+
+    private static void AssertInputParameterValidity(
+        string materialId,
+        string materialName,
+        MaterialType materialType,
+        string unitOfMeasureCode,
+        string unitOfMeasureName,
+        decimal initialStock,
+        List<string> allergensByNature,
+        List<string> allergensByCrossContamination)
+    {
+        if(string.IsNullOrWhiteSpace(materialId))
+            throw new MaterialCannotBeCreatedWithMissingMandatoryParametersException("Material ID is mandatory");
+
+        if(string.IsNullOrWhiteSpace(materialName))
+            throw new MaterialCannotBeCreatedWithMissingMandatoryParametersException("Material name is mandatory");
+
+        if(materialType is null)
+            throw new MaterialCannotBeCreatedWithMissingMandatoryParametersException("Material type is mandatory");
+
+        if(string.IsNullOrWhiteSpace(unitOfMeasureCode))
+            throw new MaterialCannotBeCreatedWithMissingMandatoryParametersException("Unit of measure code is mandatory");
+
+        if(string.IsNullOrWhiteSpace(unitOfMeasureName))
+            throw new MaterialCannotBeCreatedWithMissingMandatoryParametersException("Unit of measure name is mandatory");
+
+        if(initialStock < 0)
+            throw new MaterialCannotBeCreatedWithMissingMandatoryParametersException("Initial stock must be greater than or equal to 0");
+
+        if(allergensByNature is null)
+            throw new MaterialCannotBeCreatedWithMissingMandatoryParametersException("Allergens by nature information must be specified");
+
+        if(allergensByCrossContamination is null)
+            throw new MaterialCannotBeCreatedWithMissingMandatoryParametersException("Allergens by cross-contamination information must be specified");            
     }
 }

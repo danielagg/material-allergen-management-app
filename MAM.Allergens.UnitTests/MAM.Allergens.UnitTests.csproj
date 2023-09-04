@@ -23,4 +23,9 @@
     </PackageReference>
   </ItemGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\MAM.Shared\MAM.Shared.csproj" />
+    <ProjectReference Include="..\MAM.Allergens\MAM.Allergens.csproj" />
+  </ItemGroup>
+
 </Project>
