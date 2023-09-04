@@ -10,26 +10,17 @@ public class MaterialTests
     private readonly MaterialType DefaultMaterialType = MaterialType.Create("material_type_id", "Material type name",
         new List<MaterialCategory> { MaterialCategory.RawMaterial }, DateTime.UtcNow);
 
-    [Fact]
-    public void CreateMaterial_WithNullMaterialId_ThrowsException()
+
+    [Theory]
+    [InlineData(null, "Material code cannot be empty")]
+    public void CreateMaterial_WithIncorrectlyFormattedMaterialId_ThrowsException(string materialCode, string expectedExceptionMessage)
     {
-        var action = () =>  Material.Create(null, "Material name", DefaultMaterialType, "kg", "kilogram", 10, new List<string>(), new List<string>());
+        var action = () =>  Material.Create(materialCode, "Material name", DefaultMaterialType, "kg", "kilogram", 10, new List<string>(), new List<string>());
 
         action
             .Should()
-            .Throw<MaterialCannotBeCreatedWithMissingMandatoryParametersException>()
-            .WithMessage("Material ID is mandatory");
-    }
-
-    [Fact]
-    public void CreateMaterial_WithEmptyStringMaterialId_ThrowsException()
-    {
-        var action = () =>  Material.Create(string.Empty, "Material name", DefaultMaterialType, "kg", "kilogram", 10, new List<string>(), new List<string>());
-
-        action
-            .Should()
-            .Throw<MaterialCannotBeCreatedWithMissingMandatoryParametersException>()
-            .WithMessage("Material ID is mandatory");
+            .Throw<InvalidMaterialCodeException>()
+            .WithMessage(expectedExceptionMessage);
     }
 
     [Fact]

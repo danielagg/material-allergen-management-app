@@ -22,10 +22,7 @@ public class AllergensDbContext : DbContext
 
         modelBuilder.Entity<Material>(e =>
         {
-            e.Property(x => x.Identification).HasConversion(
-                v => JsonSerializer.Serialize(v, (JsonSerializerOptions)null),
-                v => JsonSerializer.Deserialize<IdNameModel<string>>(v, (JsonSerializerOptions)null));
-
+            e.OwnsOne(x => x.Code);
             e.HasOne(x => x.Type);
 
             e.OwnsOne(x => x.AllergensByNature, allergen => {

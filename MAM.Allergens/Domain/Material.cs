@@ -8,7 +8,8 @@ namespace MAM.Allergens.Domain;
 
 public class Material : Entity
 {
-    public IdNameModel<string> Identification { get; private set; }
+    public MaterialCode Code { get; private set; }
+    public string Name { get; private set; }
     public MaterialType Type { get; private set; }
     public Stock Stock { get; private set; }
     public AllergenByNature AllergensByNature { get; private set; }
@@ -21,7 +22,7 @@ public class Material : Entity
     }
 
     private Material(
-        string materialId,
+        MaterialCode materialCode,
         string materialName,
         MaterialType materialType,
         string unitOfMeasureCode,
@@ -31,7 +32,8 @@ public class Material : Entity
         List<string> allergensByCrossContamination
     ) : base()
     {
-        Identification = new IdNameModel<string>(materialId, materialName);
+        Code = materialCode;
+        Name = materialName;
         Type = materialType;
         Stock = Stock.CreateInitialStock(new UnitOfMeasure(unitOfMeasureCode, unitOfMeasureName), initialStock);
         AllergensByNature = AllergenByNature.Create(allergensByNature.Select(a => new Allergen(a)).ToList());
@@ -49,15 +51,16 @@ public class Material : Entity
         List<string> allergensByCrossContamination
     )
     {
-        AssertInputParameterValidity(materialId, materialName, materialType, unitOfMeasureCode, unitOfMeasureName, initialStock,
+        AssertInputParameterValidity(materialName, materialType, unitOfMeasureCode, unitOfMeasureName, initialStock,
             allergensByNature, allergensByCrossContamination);
 
-        return new(materialId, materialName, materialType, unitOfMeasureCode, unitOfMeasureName, initialStock,
+        var materialCode = MaterialCode.Create(materialId);
+
+        return new(materialCode, materialName, materialType, unitOfMeasureCode, unitOfMeasureName, initialStock,
             allergensByNature, allergensByCrossContamination);
     }
 
     private static void AssertInputParameterValidity(
-        string materialId,
         string materialName,
         MaterialType materialType,
         string unitOfMeasureCode,
@@ -66,9 +69,6 @@ public class Material : Entity
         List<string> allergensByNature,
         List<string> allergensByCrossContamination)
     {
-        if(string.IsNullOrWhiteSpace(materialId))
-            throw new MaterialCannotBeCreatedWithMissingMandatoryParametersException("Material ID is mandatory");
-
         if(string.IsNullOrWhiteSpace(materialName))
             throw new MaterialCannotBeCreatedWithMissingMandatoryParametersException("Material name is mandatory");
 

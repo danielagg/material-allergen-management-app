@@ -3,6 +3,7 @@ using System;
 using MAM.Allergens.Infrastructure;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -10,9 +11,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace MAM.Allergens.Infrastructure.DatabaseMigrations
 {
     [DbContext(typeof(AllergensDbContext))]
-    partial class AllergensDbContextModelSnapshot : ModelSnapshot
+    [Migration("20230904204233_MaterialCodeAsValueObject")]
+    partial class MaterialCodeAsValueObject
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -108,7 +111,7 @@ namespace MAM.Allergens.Infrastructure.DatabaseMigrations
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.OwnsOne("MAM.Allergens.Domain.Material.AllergensByCrossContamination#MAM.Allergens.Domain.AllergenClassification.AllergenByCrossContamination", "AllergensByCrossContamination", b1 =>
+                    b.OwnsOne("MAM.Allergens.Domain.AllergenClassification.AllergenByCrossContamination", "AllergensByCrossContamination", b1 =>
                         {
                             b1.Property<string>("MaterialId")
                                 .HasColumnType("TEXT");
@@ -125,7 +128,7 @@ namespace MAM.Allergens.Infrastructure.DatabaseMigrations
                                 .HasForeignKey("MaterialId");
                         });
 
-                    b.OwnsOne("MAM.Allergens.Domain.Material.AllergensByNature#MAM.Allergens.Domain.AllergenClassification.AllergenByNature", "AllergensByNature", b1 =>
+                    b.OwnsOne("MAM.Allergens.Domain.AllergenClassification.AllergenByNature", "AllergensByNature", b1 =>
                         {
                             b1.Property<string>("MaterialId")
                                 .HasColumnType("TEXT");
@@ -142,24 +145,7 @@ namespace MAM.Allergens.Infrastructure.DatabaseMigrations
                                 .HasForeignKey("MaterialId");
                         });
 
-                    b.OwnsOne("MAM.Allergens.Domain.Material.Code#MAM.Allergens.Domain.MaterialCode", "Code", b1 =>
-                        {
-                            b1.Property<string>("MaterialId")
-                                .HasColumnType("TEXT");
-
-                            b1.Property<string>("Value")
-                                .IsRequired()
-                                .HasColumnType("TEXT");
-
-                            b1.HasKey("MaterialId");
-
-                            b1.ToTable("Materials", "allergens");
-
-                            b1.WithOwner()
-                                .HasForeignKey("MaterialId");
-                        });
-
-                    b.OwnsOne("MAM.Allergens.Domain.Material.Stock#MAM.Allergens.Domain.Inventory.Stock", "Stock", b1 =>
+                    b.OwnsOne("MAM.Allergens.Domain.Inventory.Stock", "Stock", b1 =>
                         {
                             b1.Property<string>("MaterialId")
                                 .HasColumnType("TEXT");
@@ -174,7 +160,7 @@ namespace MAM.Allergens.Infrastructure.DatabaseMigrations
                             b1.WithOwner()
                                 .HasForeignKey("MaterialId");
 
-                            b1.OwnsOne("MAM.Allergens.Domain.Material.Stock#MAM.Allergens.Domain.Inventory.Stock.UnitOfMeasure#MAM.Allergens.Domain.Inventory.UnitOfMeasure", "UnitOfMeasure", b2 =>
+                            b1.OwnsOne("MAM.Allergens.Domain.Inventory.UnitOfMeasure", "UnitOfMeasure", b2 =>
                                 {
                                     b2.Property<string>("StockMaterialId")
                                         .HasColumnType("TEXT");
@@ -197,6 +183,23 @@ namespace MAM.Allergens.Infrastructure.DatabaseMigrations
 
                             b1.Navigation("UnitOfMeasure")
                                 .IsRequired();
+                        });
+
+                    b.OwnsOne("MAM.Allergens.Domain.MaterialCode", "Code", b1 =>
+                        {
+                            b1.Property<string>("MaterialId")
+                                .HasColumnType("TEXT");
+
+                            b1.Property<string>("Value")
+                                .IsRequired()
+                                .HasColumnType("TEXT");
+
+                            b1.HasKey("MaterialId");
+
+                            b1.ToTable("Materials", "allergens");
+
+                            b1.WithOwner()
+                                .HasForeignKey("MaterialId");
                         });
 
                     b.Navigation("AllergensByCrossContamination")

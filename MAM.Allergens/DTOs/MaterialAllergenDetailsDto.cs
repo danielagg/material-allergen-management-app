@@ -13,7 +13,7 @@ public record MaterialAllergenDetailsDto(
     public MaterialAllergenDetailsDto(Material material) : this(
         material.Id,
         material.CreatedOn,
-        material.Identification,
+        new IdNameModel<string>(material.Code.Value, material.Name),
         material.AllergensByNature.Allergens.Select(a => a.Name).ToList(),
         material.AllergensByCrossContamination.Allergens.Select(a => a.Name).ToList()) { }
 }

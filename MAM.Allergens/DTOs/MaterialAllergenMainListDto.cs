@@ -15,7 +15,7 @@ public record MaterialAllergenMainListDto(
     public MaterialAllergenMainListDto(Material material) : this(
         material.Id,
         material.CreatedOn,
-        material.Identification,
+        new IdNameModel<string>(material.Code.Value, material.Name),
         material.AllergensByNature.Allergens.Any(),
         material.AllergensByCrossContamination.Allergens.Any(),
         material.Type.Name) { }
