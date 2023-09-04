@@ -22,12 +22,14 @@ public class MaterialCode
         if (string.IsNullOrWhiteSpace(code))
             throw new InvalidMaterialCodeException("Material code cannot be empty");
 
-        if (code.Length != 6)
+        var trimmedCode = code.Trim();
+
+        if (trimmedCode.Length != 6)
             throw new InvalidMaterialCodeException("Material code must be 6 characters long");
 
-        if (!code.StartsWith('P') && !code.StartsWith('R'))
+        if (!trimmedCode.StartsWith('P') && !trimmedCode.StartsWith('R'))
             throw new InvalidMaterialCodeException("Material code must start with P or R");
 
-        return new(code);
+        return new(trimmedCode);
     }
 }

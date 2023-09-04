@@ -25,9 +25,7 @@ public class Material : Entity
         MaterialCode materialCode,
         string materialName,
         MaterialType materialType,
-        string unitOfMeasureCode,
-        string unitOfMeasureName,
-        decimal initialStock,
+        Stock initialStock,
         List<string> allergensByNature,
         List<string> allergensByCrossContamination
     ) : base()
@@ -35,7 +33,7 @@ public class Material : Entity
         Code = materialCode;
         Name = materialName;
         Type = materialType;
-        Stock = Stock.CreateInitialStock(new UnitOfMeasure(unitOfMeasureCode, unitOfMeasureName), initialStock);
+        Stock = initialStock;
         AllergensByNature = AllergenByNature.Create(allergensByNature.Select(a => new Allergen(a)).ToList());
         AllergensByCrossContamination = AllergenByCrossContamination.Create(allergensByCrossContamination.Select(a => new Allergen(a)).ToList());
     }
@@ -51,21 +49,18 @@ public class Material : Entity
         List<string> allergensByCrossContamination
     )
     {
-        AssertInputParameterValidity(materialName, materialType, unitOfMeasureCode, unitOfMeasureName, initialStock,
-            allergensByNature, allergensByCrossContamination);
+        AssertInputParameterValidity(materialName, materialType, allergensByNature, allergensByCrossContamination);
 
         var materialCode = MaterialCode.Create(materialId);
+        var unitOfMeasure = UnitOfMeasure.Create(unitOfMeasureCode, unitOfMeasureName);
+        var stock = Stock.CreateInitialStock(unitOfMeasure, initialStock);
 
-        return new(materialCode, materialName, materialType, unitOfMeasureCode, unitOfMeasureName, initialStock,
-            allergensByNature, allergensByCrossContamination);
+        return new(materialCode, materialName, materialType, stock, allergensByNature, allergensByCrossContamination);
     }
 
     private static void AssertInputParameterValidity(
         string materialName,
         MaterialType materialType,
-        string unitOfMeasureCode,
-        string unitOfMeasureName,
-        decimal initialStock,
         List<string> allergensByNature,
         List<string> allergensByCrossContamination)
     {
@@ -74,15 +69,6 @@ public class Material : Entity
 
         if(materialType is null)
             throw new MaterialCannotBeCreatedWithMissingMandatoryParametersException("Material type is mandatory");
-
-        if(string.IsNullOrWhiteSpace(unitOfMeasureCode))
-            throw new MaterialCannotBeCreatedWithMissingMandatoryParametersException("Unit of measure code is mandatory");
-
-        if(string.IsNullOrWhiteSpace(unitOfMeasureName))
-            throw new MaterialCannotBeCreatedWithMissingMandatoryParametersException("Unit of measure name is mandatory");
-
-        if(initialStock < 0)
-            throw new MaterialCannotBeCreatedWithMissingMandatoryParametersException("Initial stock must be greater than or equal to 0");
 
         if(allergensByNature is null)
             throw new MaterialCannotBeCreatedWithMissingMandatoryParametersException("Allergens by nature information must be specified");

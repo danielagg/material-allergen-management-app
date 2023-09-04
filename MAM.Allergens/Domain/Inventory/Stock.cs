@@ -1,3 +1,5 @@
+using MAM.Allergens.Domain.Exceptions;
+
 namespace MAM.Allergens.Domain.Inventory;
 
 public class Stock
@@ -17,6 +19,14 @@ public class Stock
         CurrentAvailableStock = initialStock;
     }
 
-    public static Stock CreateInitialStock(UnitOfMeasure unitOfMeasure, decimal initialStock) =>
-        new(unitOfMeasure, initialStock);
+    public static Stock CreateInitialStock(UnitOfMeasure unitOfMeasure, decimal initialStock)
+    {
+        if(unitOfMeasure is null)
+            throw new MissingUnitOfMeasureException();
+
+        if(initialStock < 0)
+            throw new InvalidInitialStockException();
+
+        return new(unitOfMeasure, initialStock);
+    }
 }
