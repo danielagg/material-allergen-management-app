@@ -1,0 +1,33 @@
+execution:
+#  - concurrency: 5
+#    ramp-up: 20s
+#    hold-for: 2m
+    scenario: CreateMaterial
+    
+settings:
+  artifacts-dir: ./bzt/%Y-%m-%d_%H-%M-%S.%f
+  check-interval: 5
+
+scenarios:
+  CreateMaterial:
+    headers:
+      Content-Type: application/json
+      
+    requests:
+      - url: "http://localhost:5156/api/allergens"
+        method: POST
+        label: "Call create new material API"
+        body-file: Requests/CreateNewMaterialRequest.json
+        extract-jsonpath:
+          createdMaterialId: $.id
+
+      - assert:
+          - assume-success: true
+            contains:
+              - ^200$
+            not: false
+            regexp: true
+            subject: http-code
+        url: "http://localhost:5156/api/allergens/${createdMaterialId}"
+        method: GET
+        label: "Get newly created material"

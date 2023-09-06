@@ -9,7 +9,7 @@ namespace MAM.Allergens.UnitTests;
 
 public class MaterialTests
 {
-    private readonly MaterialType DefaultMaterialType = MaterialType.Create("material_type_id", "Material type name",
+    private readonly MaterialType _defaultMaterialType = MaterialType.Create("material_type_id", "Material type name",
         new List<MaterialCategory> { MaterialCategory.RawMaterial }, DateTime.UtcNow);
 
     [Theory]
@@ -103,7 +103,7 @@ public class MaterialTests
     [InlineData("")]
     public void CreateMaterial_WithIllegalMaterialName_ThrowsException(string materialName)
     {
-        var action = () => Material.Create("P12345", materialName, DefaultMaterialType, "kg", "kilogram", 10, new List<string>(), new List<string>());
+        var action = () => Material.Create("P12345", materialName, _defaultMaterialType, "kg", "kilogram", 10, new List<string>(), new List<string>());
 
         action
             .Should()
@@ -125,7 +125,7 @@ public class MaterialTests
     [Fact]
     public void CreateMaterial_WithNullAllergensByNature_ThrowsException()
     {
-        var action = () => Material.Create("R12345", "Material name", DefaultMaterialType, "kg", "kilogram", 10, null, new List<string>());
+        var action = () => Material.Create("R12345", "Material name", _defaultMaterialType, "kg", "kilogram", 10, null, new List<string>());
 
         action
             .Should()
@@ -136,7 +136,7 @@ public class MaterialTests
     [Fact]
     public void CreateMaterial_WithNullAllergensByCrossContamination_ThrowsException()
     {
-        var action = () => Material.Create("R12345", "Material name", DefaultMaterialType, "kg", "kilogram", 10, new List<string>(), null);
+        var action = () => Material.Create("R12345", "Material name", _defaultMaterialType, "kg", "kilogram", 10, new List<string>(), null);
 
         action
             .Should()
@@ -147,13 +147,13 @@ public class MaterialTests
     [Fact]
     public void CreateMaterial_WithEmptyAllergensByNatureAndCrossContaminationLists_CreatesMaterial()
     {
-        var material = Material.Create("R12345", "Material name", DefaultMaterialType, "kg", "kilogram", 10, new List<string>(), new List<string>());
+        var material = Material.Create("R12345", "Material name", _defaultMaterialType, "kg", "kilogram", 10, new List<string>(), new List<string>());
 
         material.Id.Should().NotBeEmpty();
         material.CreatedOn.Should().BeCloseTo(DateTime.UtcNow, TimeSpan.FromSeconds(1));
         material.Code.Value.Should().Be("R12345");
         material.Name.Should().Be("Material name");
-        material.Type.Should().Be(DefaultMaterialType);
+        material.Type.Should().Be(_defaultMaterialType);
         material.Stock.UnitOfMeasure.Code.Should().Be("kg");
         material.Stock.UnitOfMeasure.Name.Should().Be("kilogram");
         material.Stock.CurrentAvailableStock.Should().Be(10);
@@ -167,13 +167,13 @@ public class MaterialTests
         var allergensByNature = new[] { "Wheat", "Soy" }.ToList();
         var allergensByCrossContamination = new[] { "Soy", "Nuts" }.ToList();
 
-        var material = Material.Create("R12345", "Material name", DefaultMaterialType, "kg", "kilogram", 10, allergensByNature, allergensByCrossContamination);
+        var material = Material.Create("R12345", "Material name", _defaultMaterialType, "kg", "kilogram", 10, allergensByNature, allergensByCrossContamination);
 
         material.Id.Should().NotBeEmpty();
         material.CreatedOn.Should().BeCloseTo(DateTime.UtcNow, TimeSpan.FromSeconds(1));
         material.Code.Value.Should().Be("R12345");
         material.Name.Should().Be("Material name");
-        material.Type.Should().Be(DefaultMaterialType);
+        material.Type.Should().Be(_defaultMaterialType);
         material.Stock.UnitOfMeasure.Code.Should().Be("kg");
         material.Stock.UnitOfMeasure.Name.Should().Be("kilogram");
         material.Stock.CurrentAvailableStock.Should().Be(10);

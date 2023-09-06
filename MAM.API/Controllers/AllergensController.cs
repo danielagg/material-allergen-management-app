@@ -1,12 +1,3 @@
-using Microsoft.AspNetCore.Mvc;
-using System.Threading.Tasks;
-using Microsoft.AspNetCore.Authorization;
-using MAM.Allergens;
-using MAM.Allergens.Commands;
-using MAM.Allergens.Queries;
-using MAM.Allergens.DTOs;
-using MediatR;
-
 namespace MAM.Controllers;
 
 // [Authorize]
