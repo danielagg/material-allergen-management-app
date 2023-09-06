@@ -14,20 +14,20 @@ scenarios:
       Content-Type: application/json
       
     requests:
-      - url: "http://localhost:5156/api/allergens"
+      - label: Call create new material API
+        url: http://localhost:5156/api/allergens
         method: POST
-        label: "Call create new material API"
         body-file: Requests/CreateNewMaterialRequest.json
         extract-jsonpath:
           createdMaterialId: $.id
 
-      - assert:
+      - label: Get newly created material
+        url: http://localhost:5156/api/allergens/${createdMaterialId}
+        method: GET
+        assert:
           - assume-success: true
             contains:
               - ^200$
             not: false
             regexp: true
             subject: http-code
-        url: "http://localhost:5156/api/allergens/${createdMaterialId}"
-        method: GET
-        label: "Get newly created material"
