@@ -1,4 +1,5 @@
-﻿using MAM.Shared.Domain;
+﻿using LanguageExt.Common;
+using MAM.Shared.Domain;
 using MAM.Allergens.Domain.AllergenClassification;
 using MAM.Allergens.Domain.MaterialClassification;
 using MAM.Allergens.Domain.Inventory;
@@ -38,7 +39,7 @@ public class Material : Entity
         AllergensByCrossContamination = AllergenByCrossContamination.Create(allergensByCrossContamination.Select(a => new Allergen(a)).ToList());
     }
 
-    public static Material Create(
+    public static Result<Material> Create(
         string materialId,
         string materialName,
         MaterialType materialType,
@@ -55,7 +56,7 @@ public class Material : Entity
         var unitOfMeasure = UnitOfMeasure.Create(unitOfMeasureCode, unitOfMeasureName);
         var stock = Stock.CreateInitialStock(unitOfMeasure, initialStock);
 
-        return new(materialCode, materialName, materialType, stock, allergensByNature, allergensByCrossContamination);
+        return new Material(materialCode, materialName, materialType, stock, allergensByNature, allergensByCrossContamination);
     }
 
     private static void AssertInputParameterValidity(

@@ -149,16 +149,19 @@ public class MaterialTests
     {
         var material = Material.Create("R12345", "Material name", _defaultMaterialType, "kg", "kilogram", 10, new List<string>(), new List<string>());
 
-        material.Id.Should().NotBeEmpty();
-        material.CreatedOn.Should().BeCloseTo(DateTime.UtcNow, TimeSpan.FromSeconds(1));
-        material.Code.Value.Should().Be("R12345");
-        material.Name.Should().Be("Material name");
-        material.Type.Should().Be(_defaultMaterialType);
-        material.Stock.UnitOfMeasure.Code.Should().Be("kg");
-        material.Stock.UnitOfMeasure.Name.Should().Be("kilogram");
-        material.Stock.CurrentAvailableStock.Should().Be(10);
-        material.AllergensByNature.Allergens.Should().BeEquivalentTo(new List<Allergen>());
-        material.AllergensByCrossContamination.Allergens.Should().BeEquivalentTo(new List<Allergen>());
+        material.IfSucc(m =>
+        {
+            m.Id.Should().NotBeEmpty();
+            m.CreatedOn.Should().BeCloseTo(DateTime.UtcNow, TimeSpan.FromSeconds(1));
+            m.Code.Value.Should().Be("R12345");
+            m.Name.Should().Be("Material name");
+            m.Type.Should().Be(_defaultMaterialType);
+            m.Stock.UnitOfMeasure.Code.Should().Be("kg");
+            m.Stock.UnitOfMeasure.Name.Should().Be("kilogram");
+            m.Stock.CurrentAvailableStock.Should().Be(10);
+            m.AllergensByNature.Allergens.Should().BeEquivalentTo(new List<Allergen>());
+            m.AllergensByCrossContamination.Allergens.Should().BeEquivalentTo(new List<Allergen>());
+        });
     }    
 
     [Fact]
@@ -169,15 +172,18 @@ public class MaterialTests
 
         var material = Material.Create("R12345", "Material name", _defaultMaterialType, "kg", "kilogram", 10, allergensByNature, allergensByCrossContamination);
 
-        material.Id.Should().NotBeEmpty();
-        material.CreatedOn.Should().BeCloseTo(DateTime.UtcNow, TimeSpan.FromSeconds(1));
-        material.Code.Value.Should().Be("R12345");
-        material.Name.Should().Be("Material name");
-        material.Type.Should().Be(_defaultMaterialType);
-        material.Stock.UnitOfMeasure.Code.Should().Be("kg");
-        material.Stock.UnitOfMeasure.Name.Should().Be("kilogram");
-        material.Stock.CurrentAvailableStock.Should().Be(10);
-        material.AllergensByNature.Allergens.Should().BeEquivalentTo(new List<Allergen> { new Allergen("Wheat"), new Allergen("Soy") });
-        material.AllergensByCrossContamination.Allergens.Should().BeEquivalentTo(new List<Allergen> { new Allergen("Soy"), new Allergen("Nuts") });
+        material.IfSucc(m =>
+        {
+            m.Id.Should().NotBeEmpty();
+            m.CreatedOn.Should().BeCloseTo(DateTime.UtcNow, TimeSpan.FromSeconds(1));
+            m.Code.Value.Should().Be("R12345");
+            m.Name.Should().Be("Material name");
+            m.Type.Should().Be(_defaultMaterialType);
+            m.Stock.UnitOfMeasure.Code.Should().Be("kg");
+            m.Stock.UnitOfMeasure.Name.Should().Be("kilogram");
+            m.Stock.CurrentAvailableStock.Should().Be(10);
+            m.AllergensByNature.Allergens.Should().BeEquivalentTo(new List<Allergen> { new ("Wheat"), new ("Soy") });
+            m.AllergensByCrossContamination.Allergens.Should().BeEquivalentTo(new List<Allergen> { new ("Soy"), new ("Nuts") });
+        });
     } 
 }
