@@ -13,6 +13,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MAM.Allergens.UnitTests", "
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MAM.IntegrationTests", "MAM.IntegrationTests\MAM.IntegrationTests.csproj", "{AFA4DB03-9BB4-4C68-A658-B5F87F683F07}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MAM.IaC", "MAM.IaC\MAM.IaC.csproj", "{92D9C8A9-519E-458D-B9FA-79727B14AC6B}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -43,5 +45,9 @@ Global
 		{AFA4DB03-9BB4-4C68-A658-B5F87F683F07}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{AFA4DB03-9BB4-4C68-A658-B5F87F683F07}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{AFA4DB03-9BB4-4C68-A658-B5F87F683F07}.Release|Any CPU.Build.0 = Release|Any CPU
+		{92D9C8A9-519E-458D-B9FA-79727B14AC6B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{92D9C8A9-519E-458D-B9FA-79727B14AC6B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{92D9C8A9-519E-458D-B9FA-79727B14AC6B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{92D9C8A9-519E-458D-B9FA-79727B14AC6B}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 EndGlobal
