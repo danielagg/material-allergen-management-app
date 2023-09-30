@@ -4,7 +4,8 @@ using MAM.Allergens.DTOs;
 using MAM.Allergens.Infrastructure;
 using MediatR;
 using Microsoft.EntityFrameworkCore;
-using LanguageExt.Common;
+using MAM.Allergens.Domain.AllergenClassification;
+using MAM.Allergens.Domain.Inventory;
 
 namespace MAM.Allergens.Handlers;
 
@@ -20,13 +21,22 @@ public class CreateNewMaterialHandler : IRequestHandler<CreateNewMaterialCommand
     public async Task<MaterialAllergenDetailsDto> Handle(CreateNewMaterialCommand request,
         CancellationToken cancellationToken)
     {
-        var materialType = await _dbContext.MaterialTypes.SingleAsync(mt => mt.Id == request.MaterialTypeId, cancellationToken: cancellationToken);
+        var materialType = await _dbContext.MaterialTypes.SingleAsync(mt =>
+            mt.Id == request.MaterialTypeId, cancellationToken: cancellationToken);
 
+        var materialCode = MaterialCode.Create(request.MaterialId);
+        var materialName = MaterialName.Create(request.ShortMaterialName, request.FullMaterialName);
+        var unitOfMeasure = UnitOfMeasure.Create(request.UnitOfMeasureCode, request.UnitOfMeasureName);
+        var stock = Stock.CreateInitialStock(unitOfMeasure, request.InitialStock);
+        
+        var allergenByNature = AllergenByNature.Create(
+            request.AllergensByNature.Select(a => new Allergen(a)).ToList());
+        
+        var allergenByCrossContamination = AllergenByCrossContamination.Create(
+            request.AllergensByCrossContamination.Select(a => new Allergen(a)).ToList());
+        
         var result = Material
-            .Create(
-                request.MaterialId, request.MaterialName, materialType, request.UnitOfMeasureCode,
-                request.UnitOfMeasureName, request.InitialStock,
-                request.AllergensByNature, request.AllergensByCrossContamination);
+            .Create(materialCode, materialName, materialType, stock, allergenByNature, allergenByCrossContamination);
 
         result.IfSucc(async material =>
         {

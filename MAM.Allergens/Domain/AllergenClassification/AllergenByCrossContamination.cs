@@ -2,7 +2,7 @@ namespace MAM.Allergens.Domain.AllergenClassification;
 
 public class AllergenByCrossContamination
 {
-    public List<Allergen> Allergens { get; private set; }
+    public IEnumerable<Allergen> Allergens { get; } = Enumerable.Empty<Allergen>();
 
     // for EF
     protected AllergenByCrossContamination()
@@ -10,22 +10,24 @@ public class AllergenByCrossContamination
         
     }
 
-    private AllergenByCrossContamination(List<Allergen> initialAllergens)
+    private AllergenByCrossContamination(IEnumerable<Allergen> initialAllergens)
     {
         Allergens = initialAllergens;
     }
 
-    public static AllergenByCrossContamination Create(List<Allergen> initialAllergens) => new(initialAllergens);
+    public static AllergenByCrossContamination Create(IEnumerable<Allergen> initialAllergens) => new(initialAllergens);
 
-    public void Add(Allergen allergen)
+    public AllergenByCrossContamination Add(Allergen allergen)
     {
         // todo: validation
-        Allergens.Add(allergen);
+        var newItems = Allergens.Concat(new[] { allergen });
+        return new AllergenByCrossContamination(newItems);
     }
 
-    public void Remove(Allergen allergen)
+    public AllergenByCrossContamination Remove(Allergen allergen)
     {
         // todo: validation
-        Allergens.Remove(allergen);
+        var newItems = Allergens.Where(existingItem => !existingItem.Equals(allergen));
+        return new AllergenByCrossContamination(newItems);
     }
 }

@@ -6,7 +6,8 @@ namespace MAM.Allergens.Commands;
 public class CreateNewMaterialCommand : IRequest<MaterialAllergenDetailsDto>
 {
     public string MaterialId { get; }
-    public string MaterialName { get; }
+    public string ShortMaterialName { get; }
+    public string FullMaterialName { get; }
     public string MaterialTypeId { get; }
     public string UnitOfMeasureCode { get; }
     public string UnitOfMeasureName { get; }
@@ -16,7 +17,8 @@ public class CreateNewMaterialCommand : IRequest<MaterialAllergenDetailsDto>
 
     public CreateNewMaterialCommand(
         string materialId,
-        string materialName,
+        string shortMaterialName,
+        string fullMaterialName,
         string materialTypeId,
         string unitOfMeasureCode,
         string unitOfMeasureName,
@@ -26,7 +28,8 @@ public class CreateNewMaterialCommand : IRequest<MaterialAllergenDetailsDto>
     )
     {
         MaterialId = materialId;
-        MaterialName = materialName;
+        ShortMaterialName = shortMaterialName;
+        FullMaterialName = fullMaterialName;
         MaterialTypeId = materialTypeId;
         UnitOfMeasureCode = unitOfMeasureCode;
         UnitOfMeasureName = unitOfMeasureName;

@@ -3,8 +3,9 @@ using MAM.Allergens;
 namespace MAM.Allergens.DTOs;
 
 public record CreateNewMaterialRequestDto(
-    string MaterialId,
-    string MaterialName,
+    string MaterialCode,
+    string ShortMaterialName,
+    string FullMaterialName,
     string MaterialTypeId,
     string UnitOfMeasureCode,
     string UnitOfMeasureName,

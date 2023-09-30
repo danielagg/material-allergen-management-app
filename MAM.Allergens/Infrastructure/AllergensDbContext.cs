@@ -23,6 +23,7 @@ public class AllergensDbContext : DbContext
         modelBuilder.Entity<Material>(e =>
         {
             e.OwnsOne(x => x.Code);
+            e.OwnsOne(x => x.Name);
             e.HasOne(x => x.Type);
 
             e.OwnsOne(x => x.AllergensByNature, allergen => {

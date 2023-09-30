@@ -33,8 +33,9 @@ public class AllergensController : ControllerBase
     public async Task<IActionResult> CreateNewMaterial([FromBody] CreateNewMaterialRequestDto data)
     {
         var material = await _mediator.Send(new CreateNewMaterialCommand(
-            data.MaterialId,
-            data.MaterialName,
+            data.MaterialCode,
+            data.ShortMaterialName,
+            data.FullMaterialName,
             data.MaterialTypeId,
             data.UnitOfMeasureCode,
             data.UnitOfMeasureName,

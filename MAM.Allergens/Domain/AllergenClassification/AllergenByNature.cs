@@ -2,7 +2,7 @@ namespace MAM.Allergens.Domain.AllergenClassification;
 
 public class AllergenByNature
 {
-    public List<Allergen> Allergens { get; private set; }
+    public IEnumerable<Allergen> Allergens { get; } = Enumerable.Empty<Allergen>();
 
     // for EF
     protected AllergenByNature()
@@ -10,22 +10,23 @@ public class AllergenByNature
         
     }
 
-    private AllergenByNature(List<Allergen> initialAllergens)
+    private AllergenByNature(IEnumerable<Allergen> initialAllergens)
     {
         Allergens = initialAllergens;
     }
 
-    public static AllergenByNature Create(List<Allergen> initialAllergens) => new(initialAllergens);
+    public static AllergenByNature Create(IEnumerable<Allergen> initialAllergens) => new(initialAllergens);
 
-    public void Add(Allergen allergen)
+    public AllergenByNature Add(Allergen allergen)
     {
         // todo: validation
-        Allergens.Add(allergen);
+        var newItems = Allergens.Concat(new[] { allergen });
+        return new AllergenByNature(newItems);
     }
 
-    public void Remove(Allergen allergen)
+    public AllergenByNature Remove(Allergen allergen)
     {
-        // todo: validation
-        Allergens.Remove(allergen);
+        var newItems = Allergens.Where(existingItem => !existingItem.Equals(allergen));
+        return new AllergenByNature(newItems);
     }
 }
