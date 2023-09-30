@@ -1,6 +1,6 @@
 namespace MAM.Allergens.Domain.AllergenClassification;
 
-public class AllergenByNature
+public class AllergenByNature : IAllergenClassification<AllergenByNature>
 {
     public IEnumerable<Allergen> Allergens { get; } = Enumerable.Empty<Allergen>();
 
@@ -19,14 +19,13 @@ public class AllergenByNature
 
     public AllergenByNature Add(Allergen allergen)
     {
-        // todo: validation
-        var newItems = Allergens.Concat(new[] { allergen });
-        return new AllergenByNature(newItems);
+        var newItems = AllergenClassificationManager.TryAdd(Allergens, allergen);
+        return new(newItems);
     }
 
     public AllergenByNature Remove(Allergen allergen)
     {
-        var newItems = Allergens.Where(existingItem => !existingItem.Equals(allergen));
-        return new AllergenByNature(newItems);
+        var newItems = AllergenClassificationManager.TryRemove(Allergens, allergen);
+        return new(newItems);
     }
 }

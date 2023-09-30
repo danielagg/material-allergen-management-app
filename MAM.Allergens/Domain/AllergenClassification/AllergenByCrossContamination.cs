@@ -1,6 +1,6 @@
 namespace MAM.Allergens.Domain.AllergenClassification;
 
-public class AllergenByCrossContamination
+public class AllergenByCrossContamination : IAllergenClassification<AllergenByCrossContamination>
 {
     public IEnumerable<Allergen> Allergens { get; } = Enumerable.Empty<Allergen>();
 
@@ -19,15 +19,13 @@ public class AllergenByCrossContamination
 
     public AllergenByCrossContamination Add(Allergen allergen)
     {
-        // todo: validation
-        var newItems = Allergens.Concat(new[] { allergen });
-        return new AllergenByCrossContamination(newItems);
+        var newItems = AllergenClassificationManager.TryAdd(Allergens, allergen);
+        return new(newItems);
     }
 
     public AllergenByCrossContamination Remove(Allergen allergen)
     {
-        // todo: validation
-        var newItems = Allergens.Where(existingItem => !existingItem.Equals(allergen));
-        return new AllergenByCrossContamination(newItems);
+        var newItems = AllergenClassificationManager.TryRemove(Allergens, allergen);
+        return new(newItems);
     }
 }
