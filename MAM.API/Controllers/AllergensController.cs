@@ -22,10 +22,10 @@ public class AllergensController : ControllerBase
         return Ok(result);
     }
 
-    [HttpGet("{id}")]
-    public async Task<IActionResult> Get([FromRoute] string id)
+    [HttpGet("{materialId}")]
+    public async Task<IActionResult> Get([FromRoute] string materialId)
     {
-        var material = await _mediator.Send(new GetMaterialDetailsQuery(id));
+        var material = await _mediator.Send(new GetMaterialDetailsQuery(materialId));
         return Ok(material);
     }
 
@@ -44,6 +44,34 @@ public class AllergensController : ControllerBase
             data.AllergensByCrossContamination
         ));
 
+        return Ok(material);
+    }
+    
+    [HttpPost("{materialId}/allergens-by-nature/add")]
+    public async Task<IActionResult> AddNewAllergenByNature([FromRoute] string materialId, [FromBody] AddNewAllergenRequestDto data)
+    {
+        var material = await _mediator.Send(new AddAllergenByNatureCommand(materialId, data.Allergen));
+        return Ok(material);
+    }
+    
+    [HttpPost("{materialId}/allergens-by-nature/remove")]
+    public async Task<IActionResult> RemoveNewAllergenByNature([FromRoute] string materialId, [FromBody] RemoveAllergenRequestDto data)
+    {
+        var material = await _mediator.Send(new RemoveAllergenByNatureCommand(materialId, data.Allergen));
+        return Ok(material);
+    }
+    
+    [HttpPost("{materialId}/allergens-by-cross-contamination/add")]
+    public async Task<IActionResult> AddNewAllergenByCrossContamination([FromRoute] string materialId, [FromBody] AddNewAllergenRequestDto data)
+    {
+        var material = await _mediator.Send(new AddAllergenByCrossContaminationCommand(materialId, data.Allergen));
+        return Ok(material);
+    }
+    
+    [HttpPost("{materialId}/allergens-by-cross-contamination/remove")]
+    public async Task<IActionResult> RemoveNewAllergenByCrossContamination([FromRoute] string materialId, [FromBody] RemoveAllergenRequestDto data)
+    {
+        var material = await _mediator.Send(new RemoveAllergenByCrossContaminationCommand(materialId, data.Allergen));
         return Ok(material);
     }    
 }

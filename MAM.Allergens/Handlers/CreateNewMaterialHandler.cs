@@ -22,7 +22,7 @@ public class CreateNewMaterialHandler : IRequestHandler<CreateNewMaterialCommand
         CancellationToken cancellationToken)
     {
         var materialType = await _dbContext.MaterialTypes.SingleAsync(mt =>
-            mt.Id == request.MaterialTypeId, cancellationToken: cancellationToken);
+            mt.Id == request.MaterialTypeId, cancellationToken);
 
         var materialCode = MaterialCode.Create(request.MaterialId);
         var materialName = MaterialName.Create(request.ShortMaterialName, request.FullMaterialName);

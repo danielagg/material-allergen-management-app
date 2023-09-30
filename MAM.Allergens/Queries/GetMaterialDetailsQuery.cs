@@ -5,10 +5,10 @@ namespace MAM.Allergens.Queries;
 
 public class GetMaterialDetailsQuery : IRequest<MaterialAllergenDetailsDto>
 {
-    public string Id { get; }
+    public string MaterialId { get; }
 
-    public GetMaterialDetailsQuery(string id)
+    public GetMaterialDetailsQuery(string materialId)
     {
-        Id = id;
+        MaterialId = materialId;
     }
 }
