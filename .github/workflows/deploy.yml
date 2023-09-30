@@ -36,7 +36,11 @@ jobs:
           password: ${{ secrets.DOCKERHUB_PASSWORD }}
 
       - name: Push Docker Image
-        run: docker push mam-api:latest
+        run: |
+          docker tag mam-api:latest ${{ secrets.DOCKERHUB_USERNAME }}/mam-api:latest
+          docker push ${{ secrets.DOCKERHUB_USERNAME }}/mam-api:latest
+        env:
+          DOCKER_CLI_ACI_REGISTRY: https://index.docker.io/v1/
 
   deploy:
     needs: build-and-publish  
