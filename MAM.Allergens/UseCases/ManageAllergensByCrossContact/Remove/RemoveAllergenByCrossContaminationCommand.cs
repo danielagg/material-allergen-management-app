@@ -1,7 +1,7 @@
+using MAM.Allergens.UseCases.GetMaterialDetails;
 using MediatR;
-using MAM.Allergens.DTOs;
 
-namespace MAM.Allergens.Commands;
+namespace MAM.Allergens.UseCases.ManageAllergensByCrossContact.Remove;
 
 public class RemoveAllergenByCrossContaminationCommand : IRequest<MaterialAllergenDetailsDto>
 {

@@ -1,7 +1,7 @@
 using MediatR;
-using MAM.Allergens.DTOs;
+using MAM.Allergens.UseCases.GetMaterialDetails;
 
-namespace MAM.Allergens.Commands;
+namespace MAM.Allergens.UseCases.CreateMaterial;
 
 public class CreateNewMaterialCommand : IRequest<MaterialAllergenDetailsDto>
 {

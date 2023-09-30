@@ -1,7 +1,7 @@
+using MAM.Allergens.UseCases.GetMaterialDetails;
 using MediatR;
-using MAM.Allergens.DTOs;
 
-namespace MAM.Allergens.Commands;
+namespace MAM.Allergens.UseCases.ManageAllergensByNature.Remove;
 
 public class RemoveAllergenByNatureCommand : IRequest<MaterialAllergenDetailsDto>
 {

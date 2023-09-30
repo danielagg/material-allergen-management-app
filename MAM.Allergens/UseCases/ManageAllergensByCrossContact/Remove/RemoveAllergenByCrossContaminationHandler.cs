@@ -1,11 +1,10 @@
-using MAM.Allergens.Commands;
 using MAM.Allergens.Domain.AllergenClassification;
-using MAM.Allergens.DTOs;
+using MAM.Allergens.UseCases.GetMaterialDetails;
 using MAM.Allergens.Infrastructure;
 using MediatR;
 using Microsoft.EntityFrameworkCore;
 
-namespace MAM.Allergens.Handlers;
+namespace MAM.Allergens.UseCases.ManageAllergensByCrossContact.Remove;
 
 public class RemoveAllergenByCrossContaminationHandler : IRequestHandler<RemoveAllergenByCrossContaminationCommand, MaterialAllergenDetailsDto>
 {

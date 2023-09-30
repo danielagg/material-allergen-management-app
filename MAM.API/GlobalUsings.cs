@@ -3,8 +3,6 @@ global using System.Threading.Tasks;
 global using Microsoft.AspNetCore.Authorization;
 global using MAM.Infrastructure;
 global using MAM.Users;
-global using MAM.Allergens.Commands;
-global using MAM.Allergens.Queries;
 global using MAM.Allergens.DTOs;
 global using MediatR;
 global using MAM.Allergens.Infrastructure;

@@ -1,7 +1,6 @@
-using MAM.Allergens.DTOs;
 using MediatR;
 
-namespace MAM.Allergens.Queries;
+namespace MAM.Allergens.UseCases.GetMaterialDetails;
 
 public class GetMaterialDetailsQuery : IRequest<MaterialAllergenDetailsDto>
 {

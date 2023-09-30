@@ -1,3 +1,11 @@
+using MAM.Allergens.UseCases.CreateMaterial;
+using MAM.Allergens.UseCases.GetMaterialDetails;
+using MAM.Allergens.UseCases.GetMaterialList;
+using MAM.Allergens.UseCases.ManageAllergensByCrossContact.Add;
+using MAM.Allergens.UseCases.ManageAllergensByCrossContact.Remove;
+using MAM.Allergens.UseCases.ManageAllergensByNature.Add;
+using MAM.Allergens.UseCases.ManageAllergensByNature.Remove;
+
 namespace MAM.Controllers;
 
 // [Authorize]

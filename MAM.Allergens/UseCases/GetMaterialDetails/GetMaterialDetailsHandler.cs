@@ -1,10 +1,8 @@
-using MAM.Allergens.DTOs;
-using MAM.Allergens.Queries;
 using MAM.Allergens.Infrastructure;
 using MediatR;
 using Microsoft.EntityFrameworkCore;
 
-namespace MAM.Allergens.Handlers;
+namespace MAM.Allergens.UseCases.GetMaterialDetails;
 
 public class GetMaterialDetailsHandler : IRequestHandler<GetMaterialDetailsQuery, MaterialAllergenDetailsDto>
 {

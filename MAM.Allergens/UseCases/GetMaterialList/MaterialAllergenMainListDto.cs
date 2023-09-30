@@ -1,8 +1,7 @@
 using MAM.Allergens.Domain;
 using MAM.Shared.Domain;
-using System.Linq;
 
-namespace MAM.Allergens.DTOs;
+namespace MAM.Allergens.UseCases.GetMaterialList;
 
 public record MaterialAllergenMainListDto(
     string Id,

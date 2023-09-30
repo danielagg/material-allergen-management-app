@@ -1,11 +1,9 @@
-using MAM.Allergens.DTOs;
-using MAM.Allergens.Queries;
 using MAM.Allergens.Infrastructure;
 using MAM.Shared.Domain;
 using MediatR;
 using Microsoft.EntityFrameworkCore;
 
-namespace MAM.Allergens.Handlers;
+namespace MAM.Allergens.UseCases.GetMaterialList;
 
 public class GetMaterialMainListHandler : IRequestHandler<GetMaterialMainListQuery, PaginatedResult<MaterialAllergenMainListDto>>
 {
@@ -18,14 +16,14 @@ public class GetMaterialMainListHandler : IRequestHandler<GetMaterialMainListQue
 
     public async Task<PaginatedResult<MaterialAllergenMainListDto>> Handle(GetMaterialMainListQuery request, CancellationToken cancellationToken)
     {
-        var totalCount = await _dbContext.Materials.CountAsync();
+        var totalCount = await _dbContext.Materials.CountAsync(cancellationToken);
 
         var result = await _dbContext.Materials
             .Include(x => x.Type)
             .OrderByDescending(x => x.CreatedOn)
             .Skip(request.Skip)
             .Take(request.Top)
-            .ToListAsync();
+            .ToListAsync(cancellationToken);
 
         var dtos = result.Select(x => new MaterialAllergenMainListDto(x));
 

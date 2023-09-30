@@ -1,6 +1,4 @@
-using MAM.Allergens;
-
-namespace MAM.Allergens.DTOs;
+namespace MAM.Allergens.UseCases.CreateMaterial;
 
 public record CreateNewMaterialRequestDto(
     string MaterialCode,

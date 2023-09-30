@@ -1,9 +1,7 @@
-using MAM.Allergens.Domain;
 using MAM.Shared.Domain;
-using MAM.Allergens.DTOs;
 using MediatR;
 
-namespace MAM.Allergens.Queries;
+namespace MAM.Allergens.UseCases.GetMaterialList;
 
 public class GetMaterialMainListQuery : IRequest<PaginatedResult<MaterialAllergenMainListDto>>
 {

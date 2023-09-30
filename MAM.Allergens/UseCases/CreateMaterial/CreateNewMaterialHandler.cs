@@ -1,13 +1,12 @@
-using MAM.Allergens.Commands;
 using MAM.Allergens.Domain;
-using MAM.Allergens.DTOs;
 using MAM.Allergens.Infrastructure;
 using MediatR;
 using Microsoft.EntityFrameworkCore;
 using MAM.Allergens.Domain.AllergenClassification;
 using MAM.Allergens.Domain.Inventory;
+using MAM.Allergens.UseCases.GetMaterialDetails;
 
-namespace MAM.Allergens.Handlers;
+namespace MAM.Allergens.UseCases.CreateMaterial;
 
 public class CreateNewMaterialHandler : IRequestHandler<CreateNewMaterialCommand, MaterialAllergenDetailsDto>
 {
