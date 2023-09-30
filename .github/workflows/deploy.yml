@@ -10,20 +10,14 @@ jobs:
   test:
     runs-on: ubuntu-latest
     steps:
-      - name: Checkout Code
-        uses: actions/checkout@v2
-
-      - name: Setup .NET SDK
+      - uses: actions/checkout@v2
       - uses: actions/setup-dotnet@v3
         with:
           dotnet-version: '8.0.x'
           dotnet-quality: 'preview'
-
-      - name: Restore dependencies
-        run: dotnet restore
-
-      - name: Build and test
-        run: dotnet test
+      - run: |
+          dotnet restore
+          dotnet test
         
   build-and-publish:
     needs: test
