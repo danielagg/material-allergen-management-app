@@ -1,7 +1,7 @@
 using MAM.Allergens.UseCases.GetMaterialDetails;
 using MediatR;
 
-namespace MAM.Allergens.UseCases.ManageAllergensByNature.Add;
+namespace MAM.Allergens.UseCases.ManageAllergenClassification.ByNature.Add;
 
 public class AddAllergenByNatureCommand : IRequest<MaterialAllergenDetailsDto>
 {

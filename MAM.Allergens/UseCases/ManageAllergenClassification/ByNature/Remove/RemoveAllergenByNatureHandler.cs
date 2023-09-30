@@ -4,7 +4,7 @@ using MAM.Allergens.Infrastructure;
 using MediatR;
 using Microsoft.EntityFrameworkCore;
 
-namespace MAM.Allergens.UseCases.ManageAllergensByNature.Remove;
+namespace MAM.Allergens.UseCases.ManageAllergenClassification.ByNature.Remove;
 
 public class RemoveAllergenByNatureHandler : IRequestHandler<RemoveAllergenByNatureCommand, MaterialAllergenDetailsDto>
 {

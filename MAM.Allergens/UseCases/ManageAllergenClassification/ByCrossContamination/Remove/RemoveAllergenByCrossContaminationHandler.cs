@@ -4,7 +4,7 @@ using MAM.Allergens.Infrastructure;
 using MediatR;
 using Microsoft.EntityFrameworkCore;
 
-namespace MAM.Allergens.UseCases.ManageAllergensByCrossContact.Remove;
+namespace MAM.Allergens.UseCases.ManageAllergenClassification.ByCrossContamination.Remove;
 
 public class RemoveAllergenByCrossContaminationHandler : IRequestHandler<RemoveAllergenByCrossContaminationCommand, MaterialAllergenDetailsDto>
 {

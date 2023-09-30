@@ -25,6 +25,9 @@
 
   <ItemGroup>
     <Folder Include="UseCases\" />
+    <Folder Include="UseCases\ManageAllergenClassification\ByCrossContamination\" />
+    <Folder Include="UseCases\ManageAllergenClassification\ByNature\" />
+    <Folder Include="UseCases\ManageAllergensByNature\" />
   </ItemGroup>
 
 </Project>

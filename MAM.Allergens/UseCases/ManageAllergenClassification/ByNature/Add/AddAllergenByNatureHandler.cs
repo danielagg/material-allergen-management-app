@@ -4,24 +4,24 @@ using MAM.Allergens.Infrastructure;
 using MediatR;
 using Microsoft.EntityFrameworkCore;
 
-namespace MAM.Allergens.UseCases.ManageAllergensByCrossContact.Add;
+namespace MAM.Allergens.UseCases.ManageAllergenClassification.ByNature.Add;
 
-public class AddAllergenByCrossContaminationHandler : IRequestHandler<AddAllergenByCrossContaminationCommand, MaterialAllergenDetailsDto>
+public class AddAllergenByNatureHandler : IRequestHandler<AddAllergenByNatureCommand, MaterialAllergenDetailsDto>
 {
     private readonly AllergensDbContext _dbContext;
 
-    public AddAllergenByCrossContaminationHandler(AllergensDbContext dbContext)
+    public AddAllergenByNatureHandler(AllergensDbContext dbContext)
     {
         _dbContext = dbContext;
     }
     
-    public async Task<MaterialAllergenDetailsDto> Handle(AddAllergenByCrossContaminationCommand request, CancellationToken cancellationToken)
+    public async Task<MaterialAllergenDetailsDto> Handle(AddAllergenByNatureCommand request, CancellationToken cancellationToken)
     {
         var entity = await _dbContext.Materials
             .Include(x => x.Type)
             .SingleAsync(x => x.Id == request.MaterialId, cancellationToken);
 
-        entity.AddNewAllergenByCrossContamination(new Allergen(request.NewAllergenByCrossContamination));
+        entity.AddNewAllergenByNature(new Allergen(request.NewAllergenByNature));
 
         await _dbContext.SaveChangesAsync(cancellationToken);
 
