@@ -17,6 +17,7 @@ jobs:
         run: docker build . --file MAM.API/Dockerfile --tag mam-api:latest
   
   publish:
+    needs: build
     runs-on: ubuntu-latest
     steps:
       - name: Login to Docker Hub
@@ -30,8 +31,9 @@ jobs:
           docker push mam-api:latest   
 
   deploy:
-      runs-on: ubuntu-latest
-      steps:
+    needs: publish  
+    runs-on: ubuntu-latest
+    steps:
       - name: Login to Azure using Service Principal
         uses: azure/login@v1
         with:
