@@ -53,5 +53,5 @@ jobs:
 
       - name: Deploy to Azure App Service
         run: |
-          az webapp config container set --name mam-api --resource-group material-allergen-management --docker-custom-image-name mam-api:latest
-          az webapp restart --name mam-api --resource-group material-allergen-management
+          az webapp config container set --name mam-api --resource-group material-allergen-manager --docker-custom-image-name ${{ secrets.DOCKERHUB_USERNAME }}/mam-api:latest
+          az webapp restart --name mam-api --resource-group material-allergen-manager
