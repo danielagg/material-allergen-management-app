@@ -4,17 +4,19 @@ using MAM.Shared.Domain;
 namespace MAM.Allergens.UseCases.GetMaterialList;
 
 public record MaterialAllergenMainListDto(
-    string Id,
+    string MaterialCode,
     DateTime CreatedOn,
-    IdNameModel<string> Material,
+    string ShortName,
+    string FullName,
     bool HasAllergensByNature,
     bool HasAllergensByCrossContamination,
     string MaterialType)
 {
     public MaterialAllergenMainListDto(Material material) : this(
-        material.Id,
+        material.Code.Value,
         material.CreatedOn,
-        new IdNameModel<string>(material.Code.Value, material.Name.ShortName),
+        material.Name.ShortName,
+        material.Name.FullName,
         material.AllergensByNature.Allergens.Any(),
         material.AllergensByCrossContamination.Allergens.Any(),
         material.Type.Name) { }

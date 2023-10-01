@@ -18,7 +18,7 @@ public class GetMaterialDetailsHandler : IRequestHandler<GetMaterialDetailsQuery
         // todo: proper error handling
         var entity = await _dbContext.Materials
             .Include(x => x.Type)
-            .SingleAsync(x => x.Id == request.MaterialId, cancellationToken);
+            .SingleAsync(x => x.Code.Value == request.MaterialCode, cancellationToken);
             
         return new(entity);
     }

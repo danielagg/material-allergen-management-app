@@ -5,12 +5,12 @@ namespace MAM.Allergens.UseCases.ManageAllergenClassification.ByCrossContaminati
 
 public class AddAllergenByCrossContaminationCommand : IRequest<MaterialAllergenDetailsDto>
 {
-    public string MaterialId { get; }
+    public string MaterialCode { get; }
     public string NewAllergenByCrossContamination { get; }
 
-    public AddAllergenByCrossContaminationCommand(string materialId, string newAllergenByCrossContamination)
+    public AddAllergenByCrossContaminationCommand(string materialCode, string newAllergenByCrossContamination)
     {
-        MaterialId = materialId;
+        MaterialCode = materialCode;
         NewAllergenByCrossContamination = newAllergenByCrossContamination;
     }
 }

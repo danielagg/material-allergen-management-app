@@ -1,0 +1,61 @@
+execution:
+  scenario: E2eMaterialManagement
+    
+settings:
+  artifacts-dir: ./bzt/%Y-%m-%d_%H-%M-%S.%f
+  check-interval: 5
+
+scenarios:
+  CreateMaterial:
+    headers:
+      Content-Type: application/json
+      
+    requests:
+      - label: Call create new material API
+        url: http://localhost:5156/api/allergens
+        method: POST
+        body-file: Requests/CreateNewMaterialRequest.json
+        extract-jsonpath:
+          createdMaterialCode: $.materialCode
+
+      - label: Get newly created material
+        url: http://localhost:5156/api/allergens/${createdMaterialCode}
+        method: GET
+        assert:
+          - assume-success: true
+            contains:
+              - ^200$
+            not: false
+            regexp: true
+            subject: http-code
+            
+      - label: Add allergen by nature
+        
+      - label: Validate new allergen by nature
+        
+      - label: Attempt adding the same allergen by nature
+        
+      - label: Add allergen by cross contamination
+        
+      - label: Validate new allergen by cross contamination
+        
+      - label: Attempt adding the same allergen by cross contamination
+        
+      - label: Remove allergen by nature
+        
+      - label: Validate removed allergen by nature
+        
+      - label: Remove allergen by cross contact
+        
+      - label: Validate removed allergen by cross contact
+            
+      - label: Delete newly created material
+        url: http://localhost:5156/api/allergens/${createdMaterialCode}
+        method: DELETE
+        assert:
+          - assume-success: true
+            contains:
+              - ^200$
+            not: false
+            regexp: true
+            subject: http-code            

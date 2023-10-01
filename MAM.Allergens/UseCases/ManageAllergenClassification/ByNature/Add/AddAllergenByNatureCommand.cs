@@ -5,12 +5,12 @@ namespace MAM.Allergens.UseCases.ManageAllergenClassification.ByNature.Add;
 
 public class AddAllergenByNatureCommand : IRequest<MaterialAllergenDetailsDto>
 {
-    public string MaterialId { get; }
+    public string MaterialCode { get; }
     public string NewAllergenByNature { get; }
 
-    public AddAllergenByNatureCommand(string materialId, string newAllergenByNature)
+    public AddAllergenByNatureCommand(string materialCode, string newAllergenByNature)
     {
-        MaterialId = materialId;
+        MaterialCode = materialCode;
         NewAllergenByNature = newAllergenByNature;
     }
 }

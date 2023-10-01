@@ -5,12 +5,12 @@ namespace MAM.Allergens.UseCases.ManageAllergenClassification.ByCrossContaminati
 
 public class RemoveAllergenByCrossContaminationCommand : IRequest<MaterialAllergenDetailsDto>
 {
-    public string MaterialId { get; }
+    public string MaterialCode { get; }
     public string AllergenByCrossContaminationToRemove { get; }
 
-    public RemoveAllergenByCrossContaminationCommand(string materialId, string allergenByCrossContaminationToRemove)
+    public RemoveAllergenByCrossContaminationCommand(string materialCode, string allergenByCrossContaminationToRemove)
     {
-        MaterialId = materialId;
+        MaterialCode = materialCode;
         AllergenByCrossContaminationToRemove = allergenByCrossContaminationToRemove;
     }
 }

@@ -5,7 +5,7 @@ namespace MAM.Allergens.UseCases.CreateMaterial;
 
 public class CreateNewMaterialCommand : IRequest<MaterialAllergenDetailsDto>
 {
-    public string MaterialId { get; }
+    public string MaterialCode { get; }
     public string ShortMaterialName { get; }
     public string FullMaterialName { get; }
     public string MaterialTypeId { get; }
@@ -16,7 +16,7 @@ public class CreateNewMaterialCommand : IRequest<MaterialAllergenDetailsDto>
     public List<string> AllergensByCrossContamination{ get; }
 
     public CreateNewMaterialCommand(
-        string materialId,
+        string materialCode,
         string shortMaterialName,
         string fullMaterialName,
         string materialTypeId,
@@ -27,7 +27,7 @@ public class CreateNewMaterialCommand : IRequest<MaterialAllergenDetailsDto>
         List<string> allergensByCrossContamination
     )
     {
-        MaterialId = materialId;
+        MaterialCode = materialCode;
         ShortMaterialName = shortMaterialName;
         FullMaterialName = fullMaterialName;
         MaterialTypeId = materialTypeId;

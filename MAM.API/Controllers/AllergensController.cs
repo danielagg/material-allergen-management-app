@@ -1,4 +1,5 @@
 using MAM.Allergens.UseCases.CreateMaterial;
+using MAM.Allergens.UseCases.DeleteMaterial;
 using MAM.Allergens.UseCases.GetMaterialDetails;
 using MAM.Allergens.UseCases.GetMaterialList;
 using MAM.Allergens.UseCases.ManageAllergenClassification;
@@ -31,10 +32,10 @@ public class AllergensController : ControllerBase
         return Ok(result);
     }
 
-    [HttpGet("{materialId}")]
-    public async Task<IActionResult> Get([FromRoute] string materialId)
+    [HttpGet("{materialCode}")]
+    public async Task<IActionResult> Get([FromRoute] string materialCode)
     {
-        var material = await _mediator.Send(new GetMaterialDetailsQuery(materialId));
+        var material = await _mediator.Send(new GetMaterialDetailsQuery(materialCode));
         return Ok(material);
     }
 
@@ -56,31 +57,38 @@ public class AllergensController : ControllerBase
         return Ok(material);
     }
     
-    [HttpPost("{materialId}/allergens-by-nature/add")]
-    public async Task<IActionResult> AddNewAllergenByNature([FromRoute] string materialId, [FromBody] AddNewAllergenRequestDto data)
+    [HttpDelete("{materialCode}")]
+    public async Task<IActionResult> DeleteMaterial([FromRoute] string materialCode)
     {
-        var material = await _mediator.Send(new AddAllergenByNatureCommand(materialId, data.Allergen));
+        await _mediator.Send(new DeleteMaterialCommand(materialCode));
+        return Ok();
+    }
+    
+    [HttpPost("{materialCode}/allergens-by-nature/add")]
+    public async Task<IActionResult> AddNewAllergenByNature([FromRoute] string materialCode, [FromBody] AddNewAllergenRequestDto data)
+    {
+        var material = await _mediator.Send(new AddAllergenByNatureCommand(materialCode, data.Allergen));
         return Ok(material);
     }
     
-    [HttpPost("{materialId}/allergens-by-nature/remove")]
-    public async Task<IActionResult> RemoveNewAllergenByNature([FromRoute] string materialId, [FromBody] RemoveAllergenRequestDto data)
+    [HttpPost("{materialCode}/allergens-by-nature/remove")]
+    public async Task<IActionResult> RemoveNewAllergenByNature([FromRoute] string materialCode, [FromBody] RemoveAllergenRequestDto data)
     {
-        var material = await _mediator.Send(new RemoveAllergenByNatureCommand(materialId, data.Allergen));
+        var material = await _mediator.Send(new RemoveAllergenByNatureCommand(materialCode, data.Allergen));
         return Ok(material);
     }
     
-    [HttpPost("{materialId}/allergens-by-cross-contamination/add")]
-    public async Task<IActionResult> AddNewAllergenByCrossContamination([FromRoute] string materialId, [FromBody] AddNewAllergenRequestDto data)
+    [HttpPost("{materialCode}/allergens-by-cross-contamination/add")]
+    public async Task<IActionResult> AddNewAllergenByCrossContamination([FromRoute] string materialCode, [FromBody] AddNewAllergenRequestDto data)
     {
-        var material = await _mediator.Send(new AddAllergenByCrossContaminationCommand(materialId, data.Allergen));
+        var material = await _mediator.Send(new AddAllergenByCrossContaminationCommand(materialCode, data.Allergen));
         return Ok(material);
     }
     
-    [HttpPost("{materialId}/allergens-by-cross-contamination/remove")]
-    public async Task<IActionResult> RemoveNewAllergenByCrossContamination([FromRoute] string materialId, [FromBody] RemoveAllergenRequestDto data)
+    [HttpPost("{materialCode}/allergens-by-cross-contamination/remove")]
+    public async Task<IActionResult> RemoveNewAllergenByCrossContamination([FromRoute] string materialCode, [FromBody] RemoveAllergenRequestDto data)
     {
-        var material = await _mediator.Send(new RemoveAllergenByCrossContaminationCommand(materialId, data.Allergen));
+        var material = await _mediator.Send(new RemoveAllergenByCrossContaminationCommand(materialCode, data.Allergen));
         return Ok(material);
     }    
 }

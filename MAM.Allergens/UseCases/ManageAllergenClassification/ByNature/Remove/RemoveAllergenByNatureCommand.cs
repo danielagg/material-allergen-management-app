@@ -5,12 +5,12 @@ namespace MAM.Allergens.UseCases.ManageAllergenClassification.ByNature.Remove;
 
 public class RemoveAllergenByNatureCommand : IRequest<MaterialAllergenDetailsDto>
 {
-    public string MaterialId { get; }
+    public string MaterialCode { get; }
     public string AllergenByNatureToRemove { get; }
 
-    public RemoveAllergenByNatureCommand(string materialId, string allergenByNatureToRemove)
+    public RemoveAllergenByNatureCommand(string materialCode, string allergenByNatureToRemove)
     {
-        MaterialId = materialId;
+        MaterialCode = materialCode;
         AllergenByNatureToRemove = allergenByNatureToRemove;
     }
 }

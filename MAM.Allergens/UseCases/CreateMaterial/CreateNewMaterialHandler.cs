@@ -3,6 +3,7 @@ using MAM.Allergens.Infrastructure;
 using MediatR;
 using Microsoft.EntityFrameworkCore;
 using MAM.Allergens.Domain.AllergenClassification;
+using MAM.Allergens.Domain.Exceptions;
 using MAM.Allergens.Domain.Inventory;
 using MAM.Allergens.UseCases.GetMaterialDetails;
 
@@ -20,10 +21,12 @@ public class CreateNewMaterialHandler : IRequestHandler<CreateNewMaterialCommand
     public async Task<MaterialAllergenDetailsDto> Handle(CreateNewMaterialCommand request,
         CancellationToken cancellationToken)
     {
+        await AssertNoMaterialWithTheSameMaterialCodeExist(request.MaterialCode);
+        
         var materialType = await _dbContext.MaterialTypes.SingleAsync(mt =>
             mt.Id == request.MaterialTypeId, cancellationToken);
 
-        var materialCode = MaterialCode.Create(request.MaterialId);
+        var materialCode = MaterialCode.Create(request.MaterialCode);
         var materialName = MaterialName.Create(request.ShortMaterialName, request.FullMaterialName);
         var unitOfMeasure = UnitOfMeasure.Create(request.UnitOfMeasureCode, request.UnitOfMeasureName);
         var stock = Stock.CreateInitialStock(unitOfMeasure, request.InitialStock);
@@ -46,5 +49,14 @@ public class CreateNewMaterialHandler : IRequestHandler<CreateNewMaterialCommand
         return result.Match<MaterialAllergenDetailsDto>(
             material => new MaterialAllergenDetailsDto(material),
             exception => throw exception); // todo: throw...
+    }
+
+    private async Task AssertNoMaterialWithTheSameMaterialCodeExist(string requestedMaterialCode)
+    {
+        var doesMaterialWithTheSameMaterialCodeExists = await _dbContext.Materials
+            .AnyAsync(x => x.Code.Value == requestedMaterialCode);
+
+        if (doesMaterialWithTheSameMaterialCodeExists)
+            throw new MaterialAlreadyExistsException(requestedMaterialCode);
     }
 }
