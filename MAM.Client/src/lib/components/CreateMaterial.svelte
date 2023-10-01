@@ -6,6 +6,7 @@
 	import { superForm } from 'sveltekit-superforms/client';
 	import SummaryStep from './create-new-material-steps/SummaryStep.svelte';
 	import SuperDebug from 'sveltekit-superforms/client/SuperDebug.svelte';
+	import { dev } from '$app/environment';
 
 	// todo: form should be coming from the +page.svelte file under the (protected) root
 	const { form, enhance } = superForm(
@@ -63,6 +64,6 @@
 				<SummaryStep {form} />
 			</Step>
 		</Stepper>
-		<SuperDebug data={$form} />
+		<SuperDebug data={$form} display={dev} />
 	</div>
 </form>
