@@ -29,6 +29,7 @@
       <ProjectReference Include="..\MAM.Allergens\MAM.Allergens.csproj" />
     </ItemGroup>
 
+
     <ItemGroup>
       <Content Include="..\.dockerignore">
         <Link>.dockerignore</Link>
