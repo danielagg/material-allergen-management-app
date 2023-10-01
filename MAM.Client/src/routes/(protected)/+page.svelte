@@ -12,8 +12,7 @@
 	const modalStore = getModalStore();
 
 	const modalComponent: ModalComponent = {
-		ref: CreateMaterial,
-		props: { blur: '1000' }
+		ref: CreateMaterial
 	};
 
 	const modal: ModalSettings = {
