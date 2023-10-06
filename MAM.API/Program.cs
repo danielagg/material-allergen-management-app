@@ -30,8 +30,15 @@ builder.Services.AddMediatR(cfg => {
     cfg.RegisterServicesFromAssembly(typeof(Material).Assembly);
 });
 
-builder.Services.AddDbContext<AuthenticatedUserDbContext>(x => x.UseSqlite("DataSource=app.db"));
+builder.Services.AddDbContext<AuthenticatedUserDbContext>(x =>
+{
+    var connectionString = builder.Environment.IsDevelopment()
+        ? "DataSource=app_development.db"
+        : "DataSource=app.db";
 
+    x.UseSqlite(connectionString);
+});
+    
 builder.Services.AddIdentityCore<AuthenticatedUser>()
     .AddEntityFrameworkStores<AuthenticatedUserDbContext>()
     .AddApiEndpoints();

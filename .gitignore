@@ -15,3 +15,7 @@ node_modules
 !.env.example
 vite.config.js.timestamp-*
 vite.config.ts.timestamp-*
+
+MAM.API/app_development.db
+MAM.API/app_development.db-shm
+MAM.API/app_development.db-wal
