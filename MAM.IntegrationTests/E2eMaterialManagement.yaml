@@ -27,18 +27,19 @@ scenarios:
         assert-http-status:
           - 200
             
-#      - label: Try to create duplicate of prev material
-#        url: ${ROOT_URL}/api/allergens
-#        method: POST
-#        body-file: Requests/CreateNewMaterialRequest.json
-#        assert:
-#          - assume-success: false
-#            contains:
-#              - ^409
-#            not: false
-#            regexp: true
-#            subject: http-code       
-            
+      - label: Try to create duplicate of prev material
+        url: ${ROOT_URL}/api/allergens
+        method: POST
+        body-file: Requests/CreateNewMaterialRequest.json
+        assert:
+          - assume-success: true
+            contains:
+              - 409
+            subject: http-code
+        assert-jsonpath:
+          - jsonpath: "$.message"
+            expected-value: "A material with the code 'P12345' already exists therefore it cannot be created, again."
+               
 #      - label: Add allergen by nature
         
 #      - label: Validate new allergen by nature

@@ -1,3 +1,4 @@
+using MAM.Allergens.Domain.Exceptions;
 using MAM.Allergens.UseCases.CreateMaterial;
 using MAM.Allergens.UseCases.DeleteMaterial;
 using MAM.Allergens.UseCases.GetMaterialDetails;
@@ -42,19 +43,32 @@ public class AllergensController : ControllerBase
     [HttpPost]
     public async Task<IActionResult> CreateNewMaterial([FromBody] CreateNewMaterialRequestDto data)
     {
-        var material = await _mediator.Send(new CreateNewMaterialCommand(
-            data.MaterialCode,
-            data.ShortMaterialName,
-            data.FullMaterialName,
-            data.MaterialTypeId,
-            data.UnitOfMeasureCode,
-            data.UnitOfMeasureName,
-            data.InitialStock,
-            data.AllergensByNature,
-            data.AllergensByCrossContamination
-        ));
+        try
+        {
+            var material = await _mediator.Send(new CreateNewMaterialCommand(
+                data.MaterialCode,
+                data.ShortMaterialName,
+                data.FullMaterialName,
+                data.MaterialTypeId,
+                data.UnitOfMeasureCode,
+                data.UnitOfMeasureName,
+                data.InitialStock,
+                data.AllergensByNature,
+                data.AllergensByCrossContamination
+            ));
 
-        return Ok(material);
+            return Ok(material);
+        }
+        catch (Exception e)
+        {
+            return e switch
+            {
+                MaterialAlreadyExistsException duplicateEntityEx => Conflict(
+                    new { message = duplicateEntityEx.Message }),
+                
+                _ => StatusCode(500, new { message = "An unexpected error occurred." })
+            };
+        }
     }
     
     [HttpDelete("{materialCode}")]
