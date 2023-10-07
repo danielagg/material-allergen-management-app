@@ -1,0 +1,25 @@
+included-configs:
+  - config.yaml
+
+execution:
+  - scenario: create-material
+    
+scenarios:
+  create-material:
+    headers:
+      Content-Type: application/json
+
+    requests:
+      - label: 01 - Try without MaterialType
+        url: ${ROOT_URL}/api/allergens
+        method: POST
+        body-file: Requests/CreateNewMaterialRequest_Invalid1.json
+        assert:
+          - assume-success: true
+            contains:
+              - 400
+            subject: http-code
+        assert-jsonpath:
+          - jsonpath: "$.message"
+            expected-value: "Materials cannot be created without a MaterialType specified."
+  

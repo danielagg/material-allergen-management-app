@@ -21,23 +21,6 @@ public class MaterialTests
         new List<MaterialCategory> { MaterialCategory.RawMaterial }, DateTime.UtcNow);
     
     [Fact]
-    public void CreateMaterial_WithNullMaterialType_ThrowsException()
-    {
-        var action = () => Material.Create(
-            _defaultLegalMaterialCode,
-            _defaultLegalMaterialName,
-            null,
-            _defaultLegalStock,
-            _emptyAllergenByNature,
-            _emptyAllergenByCrossContamination);
-
-        action
-            .Should()
-            .Throw<MaterialCannotBeCreatedWithMissingMandatoryParametersException>()
-            .WithMessage("Material type is mandatory");
-    }
-
-    [Fact]
     public void CreateMaterial_WithEmptyAllergensByNatureAndCrossContaminationLists_CreatesMaterial()
     {
         var material = Material.Create(

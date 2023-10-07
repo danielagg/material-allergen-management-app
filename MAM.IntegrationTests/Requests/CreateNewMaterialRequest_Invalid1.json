@@ -1,0 +1,11 @@
+{
+  "materialCode": "P12345",
+  "shortMaterialName": "Test packaging material",
+  "fullMaterialName": "Full Name of Test packaging material",
+  "materialTypeId": "",
+  "unitOfMeasureCode": "kg",
+  "unitOfMeasureName": "Kilogram",
+  "initialStock": 140,
+  "allergensByNature": [],
+  "allergensByCrossContamination": []
+}

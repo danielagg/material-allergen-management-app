@@ -76,13 +76,14 @@ public class AllergensController : ControllerBase
             return e switch
             {
                 MaterialAlreadyExistsException => Conflict(new HttpErrorBody(e)),
+                MaterialTypesDoesNotExistException => NotFound(new HttpErrorBody(e)),
                 
                 InvalidMaterialCodeException or
                     InvalidMaterialNameException or
                     InvalidUnitOfMeasureException or
                     MissingUnitOfMeasureException or
-                    InvalidInitialStockException or
-                    MaterialCannotBeCreatedWithMissingMandatoryParametersException => BadRequest(new HttpErrorBody(e)),
+                    MissingMaterialTypeException or
+                    InvalidInitialStockException => BadRequest(new HttpErrorBody(e)),
                 
                 _ => StatusCode(500, new HttpErrorBody("An unexpected error occurred."))
             };

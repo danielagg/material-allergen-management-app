@@ -48,9 +48,6 @@ public class Material : Entity
         AllergenByCrossContamination allergensByCrossContamination
     )
     {
-        if(materialType is null)
-            throw new MaterialCannotBeCreatedWithMissingMandatoryParametersException("Material type is mandatory");
-        
         return new Material(code, name, materialType, stock, allergensByNature, allergensByCrossContamination);
     }
 
