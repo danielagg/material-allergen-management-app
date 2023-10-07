@@ -17,13 +17,13 @@ public class AllergenByCrossContamination : IAllergenClassification<AllergenByCr
 
     public static AllergenByCrossContamination Create(IEnumerable<Allergen> initialAllergens) => new(initialAllergens);
 
-    public AllergenByCrossContamination Add(Allergen allergen)
+    public AllergenByCrossContamination ExtendWith(Allergen allergen)
     {
         var newItems = AllergenClassificationManager.TryAdd(Allergens, allergen);
         return new(newItems);
     }
 
-    public AllergenByCrossContamination Remove(Allergen allergen)
+    public AllergenByCrossContamination RemoveFrom(Allergen allergen)
     {
         var newItems = AllergenClassificationManager.TryRemove(Allergens, allergen);
         return new(newItems);

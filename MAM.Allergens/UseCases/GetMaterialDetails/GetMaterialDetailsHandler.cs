@@ -1,3 +1,4 @@
+using MAM.Allergens.Domain.Exceptions;
 using MAM.Allergens.Infrastructure;
 using MediatR;
 using Microsoft.EntityFrameworkCore;
@@ -15,11 +16,13 @@ public class GetMaterialDetailsHandler : IRequestHandler<GetMaterialDetailsQuery
 
     public async Task<MaterialAllergenDetailsDto> Handle(GetMaterialDetailsQuery request, CancellationToken cancellationToken)
     {
-        // todo: proper error handling
         var entity = await _dbContext.Materials
             .Include(x => x.Type)
-            .SingleAsync(x => x.Code.Value == request.MaterialCode, cancellationToken);
-            
+            .SingleOrDefaultAsync(x => x.Code.Value == request.MaterialCode, cancellationToken);
+
+        if (entity is null)
+            throw new MaterialDoesNotExistException(request.MaterialCode);
+        
         return new(entity);
     }
 }

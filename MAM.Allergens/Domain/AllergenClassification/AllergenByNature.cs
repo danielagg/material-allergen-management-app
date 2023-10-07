@@ -17,13 +17,13 @@ public class AllergenByNature : IAllergenClassification<AllergenByNature>
 
     public static AllergenByNature Create(IEnumerable<Allergen> initialAllergens) => new(initialAllergens);
 
-    public AllergenByNature Add(Allergen allergen)
+    public AllergenByNature ExtendWith(Allergen allergen)
     {
         var newItems = AllergenClassificationManager.TryAdd(Allergens, allergen);
         return new(newItems);
     }
 
-    public AllergenByNature Remove(Allergen allergen)
+    public AllergenByNature RemoveFrom(Allergen allergen)
     {
         var newItems = AllergenClassificationManager.TryRemove(Allergens, allergen);
         return new(newItems);

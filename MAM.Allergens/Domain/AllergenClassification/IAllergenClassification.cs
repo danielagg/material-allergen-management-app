@@ -2,6 +2,6 @@ namespace MAM.Allergens.Domain.AllergenClassification;
 
 public interface IAllergenClassification<out T>
 {
-    T Add(Allergen allergen);
-    T Remove(Allergen allergen);
+    T ExtendWith(Allergen allergen);
+    T RemoveFrom(Allergen allergen);
 }

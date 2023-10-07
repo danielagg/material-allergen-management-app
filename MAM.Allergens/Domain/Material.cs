@@ -55,9 +55,9 @@ public class Material : Entity
     }
 
     // todo: these can be done better:
-    public void AddNewAllergenByNature(Allergen allergen) => AllergensByNature = AllergensByNature.Add(allergen);
-    public void AddNewAllergenByCrossContamination(Allergen allergen) => AllergensByCrossContamination = AllergensByCrossContamination.Add(allergen);
+    public void AddNewAllergenByNature(Allergen allergen) => AllergensByNature = AllergensByNature.ExtendWith(allergen);
+    public void AddNewAllergenByCrossContamination(Allergen allergen) => AllergensByCrossContamination = AllergensByCrossContamination.ExtendWith(allergen);
 
-    public void RemoveAllergenByNature(Allergen allergen) => AllergensByNature = AllergensByNature.Remove(allergen);
-    public void RemoveAllergenByCrossContamination(Allergen allergen) => AllergensByCrossContamination = AllergensByCrossContamination.Remove(allergen);
+    public void RemoveAllergenByNature(Allergen allergen) => AllergensByNature = AllergensByNature.RemoveFrom(allergen);
+    public void RemoveAllergenByCrossContamination(Allergen allergen) => AllergensByCrossContamination = AllergensByCrossContamination.RemoveFrom(allergen);
 }

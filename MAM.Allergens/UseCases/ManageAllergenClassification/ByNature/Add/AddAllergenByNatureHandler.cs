@@ -1,4 +1,5 @@
 using MAM.Allergens.Domain.AllergenClassification;
+using MAM.Allergens.Domain.Exceptions;
 using MAM.Allergens.UseCases.GetMaterialDetails;
 using MAM.Allergens.Infrastructure;
 using MediatR;
@@ -17,14 +18,17 @@ public class AddAllergenByNatureHandler : IRequestHandler<AddAllergenByNatureCom
     
     public async Task<MaterialAllergenDetailsDto> Handle(AddAllergenByNatureCommand request, CancellationToken cancellationToken)
     {
-        var entity = await _dbContext.Materials
+        var material = await _dbContext.Materials
             .Include(x => x.Type)
             .SingleAsync(x => x.Code.Value == request.MaterialCode, cancellationToken);
 
-        entity.AddNewAllergenByNature(new Allergen(request.NewAllergenByNature));
+        if (material == null)
+            throw new MaterialDoesNotExistException(request.MaterialCode);
+        
+        material.AddNewAllergenByNature(new Allergen(request.NewAllergenByNature));
 
         await _dbContext.SaveChangesAsync(cancellationToken);
 
-        return new(entity);
+        return new(material);
     }
 }
