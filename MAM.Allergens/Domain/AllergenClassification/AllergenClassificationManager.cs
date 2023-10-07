@@ -22,7 +22,7 @@ public static class AllergenClassificationManager
             throw new CannotRemoveNotPresentAllergensException(
                 $"Cannot remove not present allergen: the allergen '{allergenToRemove.Name}' cannot be removed, as it's not present in the current set of allergens.");            
         }
-        
+
         return allergens.Where(existingItem => !existingItem.Equals(allergenToRemove));
     }
 }

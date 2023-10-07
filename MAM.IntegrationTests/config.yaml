@@ -1,0 +1,5 @@
+settings:
+  artifacts-dir: ./bzt/%Y-%m-%d_%H-%M-%S.%f
+  check-interval: 5
+  env:
+    ROOT_URL: http://localhost:8000

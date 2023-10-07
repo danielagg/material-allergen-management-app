@@ -54,9 +54,10 @@ public class Material : Entity
         return new Material(code, name, materialType, stock, allergensByNature, allergensByCrossContamination);
     }
 
-    public void AddNewAllergenByNature(Allergen allergen) => AllergensByNature.Add(allergen);
-    public void AddNewAllergenByCrossContamination(Allergen allergen) => AllergensByCrossContamination.Add(allergen);
+    // todo: these can be done better:
+    public void AddNewAllergenByNature(Allergen allergen) => AllergensByNature = AllergensByNature.Add(allergen);
+    public void AddNewAllergenByCrossContamination(Allergen allergen) => AllergensByCrossContamination = AllergensByCrossContamination.Add(allergen);
 
-    public void RemoveAllergenByNature(Allergen allergen) => AllergensByNature.Remove(allergen);
-    public void RemoveAllergenByCrossContamination(Allergen allergen) => AllergensByCrossContamination.Remove(allergen);
+    public void RemoveAllergenByNature(Allergen allergen) => AllergensByNature = AllergensByNature.Remove(allergen);
+    public void RemoveAllergenByCrossContamination(Allergen allergen) => AllergensByCrossContamination = AllergensByCrossContamination.Remove(allergen);
 }

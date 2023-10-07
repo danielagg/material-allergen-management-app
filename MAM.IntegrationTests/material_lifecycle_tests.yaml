@@ -1,0 +1,82 @@
+included-configs:
+  - config.yaml
+
+execution:
+  - scenario: new-material-management
+    
+scenarios:
+  new-material-management:
+    headers:
+      Content-Type: application/json
+
+    requests:
+      - label: Call create new material API
+        url: ${ROOT_URL}/api/allergens
+        method: POST
+        body-file: Requests/CreateNewMaterialRequest.json
+        extract-jsonpath:
+          created-material-code: $.materialCode
+        assert-http-status:
+          - 200
+
+      - label: Get newly created material
+        url: ${ROOT_URL}/api/allergens/${created-material-code}
+        method: GET
+        assert-http-status:
+          - 200
+
+      - label: Try to create duplicate of prev material
+        url: ${ROOT_URL}/api/allergens
+        method: POST
+        body-file: Requests/CreateNewMaterialRequest.json
+        assert:
+          - assume-success: true
+            contains:
+              - 409
+            subject: http-code
+        assert-jsonpath:
+          - jsonpath: "$.message"
+            expected-value: "A material with the code 'P12345' already exists therefore it cannot be created, again."
+      
+      - label: Add allergen by nature
+        url: ${ROOT_URL}/api/allergens/${created-material-code}/allergens-by-nature/add
+        method: POST
+        body-file: Requests/AddAllergenByNature.json
+        assert-http-status:
+          - 200
+        assert-jsonpath:
+          - jsonpath: "$.allergensByNature.length()"
+            validate: true
+            expected-value: 1
+          - jsonpath: "$.allergensByNature[0]"
+            validate: true
+            expected-value: "Soy"           
+          
+
+      
+      #      - label: Attempt adding the same allergen by nature
+      #        
+      #      - label: Add allergen by cross contamination
+      #        
+      #      - label: Validate new allergen by cross contamination
+      #        
+      #      - label: Attempt adding the same allergen by cross contamination
+      #        
+      #      - label: Remove allergen by nature
+      #        
+      #      - label: Validate removed allergen by nature
+      #        
+      #      - label: Remove allergen by cross contact
+      #        
+      #      - label: Validate removed allergen by cross contact
+      
+      - label: Delete newly created material
+        url: ${ROOT_URL}/api/allergens/${created-material-code}
+        method: DELETE
+        assert:
+          - assume-success: true
+            contains:
+              - ^200$
+            not: false
+            regexp: true
+            subject: http-code            

@@ -12,12 +12,10 @@
       <None Update="Requests\CreateNewMaterialRequest.json">
         <CopyToOutputDirectory>Always</CopyToOutputDirectory>
       </None>
-    </ItemGroup>
-
-    <ItemGroup>
-      <None Include="E2eMaterialManagement.yaml">
+      <None Update="material_lifecycle_tests.yaml">
         <CopyToOutputDirectory>Always</CopyToOutputDirectory>
       </None>
     </ItemGroup>
+
 
 </Project>
