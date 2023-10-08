@@ -16,7 +16,7 @@ public class StockTests
         action
             .Should()
             .Throw<InvalidUnitOfMeasureException>()
-            .WithMessage("Unit of measure code is mandatory");
+            .WithMessage("Unit of measure code is mandatory.");
     }
     
     [Theory]
@@ -29,7 +29,7 @@ public class StockTests
         action
             .Should()
             .Throw<InvalidUnitOfMeasureException>()
-            .WithMessage("Unit of measure name is mandatory");
+            .WithMessage("Unit of measure name is mandatory.");
     }
 
     [Theory]
@@ -50,7 +50,7 @@ public class StockTests
         action
             .Should()
             .Throw<MissingUnitOfMeasureException>()
-            .WithMessage("Initial stock must have a unit of measure");        
+            .WithMessage("Initial stock must have a unit of measure.");        
     }    
 
     [Fact]
@@ -63,6 +63,6 @@ public class StockTests
         action
             .Should()
             .Throw<InvalidInitialStockException>()
-            .WithMessage("Initial stock must be greater than or equal to 0");        
+            .WithMessage("Initial stock must be greater than or equal to 0.");        
     }
 }

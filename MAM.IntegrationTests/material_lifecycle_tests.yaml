@@ -1,5 +1,5 @@
 included-configs:
-  - config.yaml
+  - Config/config.yaml
 
 execution:
   - scenario: new-material-management

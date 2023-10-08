@@ -22,10 +22,10 @@ public class UnitOfMeasure
     public static UnitOfMeasure Create(string code, string name)
     {
         if(string.IsNullOrWhiteSpace(code))
-            throw new InvalidUnitOfMeasureException("Unit of measure code is mandatory");
+            throw new InvalidUnitOfMeasureException("Unit of measure code is mandatory.");
 
         if(string.IsNullOrWhiteSpace(name))
-            throw new InvalidUnitOfMeasureException("Unit of measure name is mandatory");
+            throw new InvalidUnitOfMeasureException("Unit of measure name is mandatory.");
 
         return new(code.Trim(), name.Trim());
     }

@@ -14,8 +14,8 @@ public class MaterialTests
 
     private readonly Stock _defaultLegalStock = Stock.CreateInitialStock(UnitOfMeasure.Create("kg", "Kilogram"), 10);
 
-    private readonly AllergenByNature _emptyAllergenByNature = AllergenByNature.Create(Enumerable.Empty<Allergen>());
-    private readonly AllergenByCrossContamination _emptyAllergenByCrossContamination = AllergenByCrossContamination.Create(Enumerable.Empty<Allergen>());
+    private readonly AllergenByNature _emptyAllergenByNature = new AllergenByNature(Enumerable.Empty<Allergen>());
+    private readonly AllergenByCrossContamination _emptyAllergenByCrossContamination = new AllergenByCrossContamination(Enumerable.Empty<Allergen>());
     
     private readonly MaterialType _defaultLegalMaterialType = MaterialType.Create("material_type_id", "Material type name",
         new List<MaterialCategory> { MaterialCategory.RawMaterial }, DateTime.UtcNow);
@@ -50,8 +50,8 @@ public class MaterialTests
     [Fact]
     public void CreateMaterial_WithFilledAllergensByNatureAndCrossContaminationLists_CreatesMaterial()
     {
-        var allergensByNature = AllergenByNature.Create(new[] { "Wheat", "Soy" }.Select(a => new Allergen(a)));
-        var allergensByCrossContamination = AllergenByCrossContamination.Create(new[] { "Nuts", "Soy" }.Select(a => new Allergen(a)));
+        var allergensByNature = new AllergenByNature(new[] { "Wheat", "Soy" }.Select(a => new Allergen(a)));
+        var allergensByCrossContamination = new AllergenByCrossContamination(new[] { "Nuts", "Soy" }.Select(a => new Allergen(a)));
 
         var material = Material.Create(
             _defaultLegalMaterialCode,

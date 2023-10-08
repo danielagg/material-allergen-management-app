@@ -30,11 +30,11 @@ public class CreateNewMaterialHandler : IRequestHandler<CreateNewMaterialCommand
         var stock = Stock.CreateInitialStock(unitOfMeasure, request.InitialStock);
         var materialType = await GetMaterialTypeAsync(request.MaterialTypeId, cancellationToken);
 
-        var allergenByNature = AllergenByNature.Create(
-            request.AllergensByNature.Select(a => new Allergen(a)).ToList());
+        var allergenByNature = new AllergenByNature(
+            request.AllergensByNature.Select(a => new Allergen(a)));
         
-        var allergenByCrossContamination = AllergenByCrossContamination.Create(
-            request.AllergensByCrossContamination.Select(a => new Allergen(a)).ToList());
+        var allergenByCrossContamination = new AllergenByCrossContamination(
+            request.AllergensByCrossContamination.Select(a => new Allergen(a)));
         
         var result = Material
             .Create(materialCode, materialName, materialType, stock, allergenByNature, allergenByCrossContamination);
