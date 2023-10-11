@@ -10,25 +10,19 @@
     </PropertyGroup>
 
     <ItemGroup>
-        <!-- <PackageReference Include="Microsoft.AspNetCore.Identity.EntityFrameworkCore" Version="8.0.0-preview.7.23375.9" />
-        <PackageReference Include="Microsoft.AspNetCore.OpenApi" Version="8.0.0-preview.7.23375.9" />
-        <PackageReference Include="Microsoft.EntityFrameworkCore.Design" Version="8.0.0-preview.7.23375.4" /> 
-        <PackageReference Include="Microsoft.EntityFrameworkCore.Sqlite" Version="8.0.0-preview.7.23375.4" /> -->
         <PackageReference Include="MediatR" Version="12.1.1" />
         <PackageReference Include="Microsoft.AspNetCore.Identity.EntityFrameworkCore" Version="8.0.0-preview.1.23112.2" />
         <PackageReference Include="Microsoft.AspNetCore.OpenApi" Version="8.0.0-preview.1.23112.2" />
-        <PackageReference Include="Microsoft.EntityFrameworkCore.Design" Version="8.0.0-preview.1.23112.2" />
-        <PackageReference Include="Microsoft.EntityFrameworkCore.Sqlite" Version="8.0.0-preview.1.23112.2" />
+        <PackageReference Include="Microsoft.EntityFrameworkCore.Design" Version="8.0.0-preview.2.23128.3" />
+        <PackageReference Include="Microsoft.EntityFrameworkCore.Sqlite" Version="8.0.0-preview.2.23128.3" />
         <PackageReference Include="Swashbuckle.AspNetCore" Version="6.5.0" />
     </ItemGroup>
 
     <ItemGroup>
-      <ProjectReference Include="..\MAM.Users\MAM.Shared.csproj" />
+      <ProjectReference Include="..\MAM.Shared\MAM.Shared.csproj" />
       <ProjectReference Include="..\MAM.Users\MAM.Users.csproj" />
-      <ProjectReference Include="..\MAM.Users\MAM.Allergens.csproj" />
       <ProjectReference Include="..\MAM.Allergens\MAM.Allergens.csproj" />
     </ItemGroup>
-
 
     <ItemGroup>
       <Content Include="..\.dockerignore">

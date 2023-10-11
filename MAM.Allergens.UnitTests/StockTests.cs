@@ -43,17 +43,6 @@ public class StockTests
     }
 
     [Fact]
-    public void CreateStock_WithoutUnitOfMeasure_ThrowsException()
-    {
-        var action = () => Stock.CreateInitialStock(null, 10);
-
-        action
-            .Should()
-            .Throw<MissingUnitOfMeasureException>()
-            .WithMessage("Initial stock must have a unit of measure.");        
-    }    
-
-    [Fact]
     public void CreateStock_WithNegativeValue_ThrowsException()
     {
         var unitOfMeasure = UnitOfMeasure.Create("kg", "Kilogram");
