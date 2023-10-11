@@ -1,6 +1,6 @@
 namespace MAM.Allergens.Domain.AllergenClassification;
 
-public record AllergenByCrossContamination(IEnumerable<Allergen> Allergens)
+public record AllergenByCrossContamination(List<Allergen> Allergens)
 {
     public AllergenByCrossContamination ExtendWith(Allergen allergen) =>
         new(AllergenClassificationManager.TryAdd(Allergens, allergen));

@@ -11,7 +11,7 @@ public class AllergenClassificationManagerTests
     {
         var soy = new Allergen("Soy");
         var wheat = new Allergen("Wheat");
-        var existingAllergens = new[] { soy, wheat };
+        var existingAllergens = new[] {soy, wheat}.ToList();
 
         var action = () => AllergenClassificationManager.TryAdd(existingAllergens, soy);
 
@@ -26,7 +26,7 @@ public class AllergenClassificationManagerTests
     {
         var soy = new Allergen("Soy");
         var wheat = new Allergen("Wheat");
-        var existingAllergens = new[] { soy, wheat };
+        var existingAllergens = new[] { soy, wheat }.ToList();
 
         var peanuts = new Allergen("Peanuts");
         
@@ -42,7 +42,7 @@ public class AllergenClassificationManagerTests
     {
         var soy = new Allergen("Soy");
         var wheat = new Allergen("Wheat");
-        var existingAllergens = new[] { soy, wheat };
+        var existingAllergens = new[] { soy, wheat }.ToList();
         
         var peanuts = new Allergen("Peanuts");
 
@@ -60,7 +60,7 @@ public class AllergenClassificationManagerTests
         var soy = new Allergen("Soy");
         var wheat = new Allergen("Wheat");
         var peanuts = new Allergen("Peanuts");
-        var existingAllergens = new[] { soy, wheat, peanuts };
+        var existingAllergens = new[] { soy, wheat, peanuts }.ToList();
 
         var result = AllergenClassificationManager.TryRemove(existingAllergens, peanuts);
 

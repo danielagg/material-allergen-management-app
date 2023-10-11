@@ -31,10 +31,10 @@ public class CreateNewMaterialHandler : IRequestHandler<CreateNewMaterialCommand
         var materialType = await GetMaterialTypeAsync(request.MaterialTypeId, cancellationToken);
 
         var allergenByNature = new AllergenByNature(
-            request.AllergensByNature.Select(a => new Allergen(a)));
+            request.AllergensByNature.Select(a => new Allergen(a)).ToList());
         
         var allergenByCrossContamination = new AllergenByCrossContamination(
-            request.AllergensByCrossContamination.Select(a => new Allergen(a)));
+            request.AllergensByCrossContamination.Select(a => new Allergen(a)).ToList());
         
         var result = Material
             .Create(materialCode, materialName, materialType, stock, allergenByNature, allergenByCrossContamination);

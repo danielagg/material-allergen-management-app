@@ -1,6 +1,6 @@
 namespace MAM.Allergens.Domain.AllergenClassification;
 
-public record AllergenByNature(IEnumerable<Allergen> Allergens)
+public record AllergenByNature(List<Allergen> Allergens)
 {
     public AllergenByNature ExtendWith(Allergen allergen) =>
         new(AllergenClassificationManager.TryAdd(Allergens, allergen));

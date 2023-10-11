@@ -4,7 +4,7 @@ namespace MAM.Allergens.Domain.AllergenClassification;
 
 public static class AllergenClassificationManager
 {
-    public static IEnumerable<Allergen> TryAdd(IEnumerable<Allergen> allergens, Allergen newAllergen)
+    public static List<Allergen> TryAdd(List<Allergen> allergens, Allergen newAllergen)
     {
         if (allergens.Contains(newAllergen))
         {
@@ -12,10 +12,10 @@ public static class AllergenClassificationManager
                 $"Cannot add duplicate allergens: the allergen '{newAllergen.Name}' cannot appear multiple times.");
         }
             
-        return allergens.Concat(new[] { newAllergen });
+        return allergens.Concat(new[] { newAllergen }).ToList();
     }
 
-    public static IEnumerable<Allergen> TryRemove(IEnumerable<Allergen> allergens, Allergen allergenToRemove)
+    public static List<Allergen> TryRemove(List<Allergen> allergens, Allergen allergenToRemove)
     {
         if (!allergens.Contains(allergenToRemove))
         {
@@ -23,6 +23,6 @@ public static class AllergenClassificationManager
                 $"Cannot remove not present allergen: the allergen '{allergenToRemove.Name}' cannot be removed, as it's not present in the current set of allergens.");            
         }
 
-        return allergens.Where(existingItem => !existingItem.Equals(allergenToRemove));
+        return allergens.Where(existingItem => !existingItem.Equals(allergenToRemove)).ToList();
     }
 }
