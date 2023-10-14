@@ -16,6 +16,6 @@ node_modules
 vite.config.js.timestamp-*
 vite.config.ts.timestamp-*
 
-MAM.API/app_development.db
-MAM.API/app_development.db-shm
-MAM.API/app_development.db-wal
+MAM.API/app.db
+MAM.API/app.db-shm
+MAM.API/app.db-wal

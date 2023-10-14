@@ -39,9 +39,6 @@
       <None Update="app_development.db">
         <CopyToOutputDirectory>Always</CopyToOutputDirectory>
       </None>
-      <None Update="app_development.db">
-        <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-      </None>
     </ItemGroup>
 
 </Project>
