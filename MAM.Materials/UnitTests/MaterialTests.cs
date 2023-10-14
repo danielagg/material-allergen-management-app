@@ -1,4 +1,7 @@
 using MAM.Materials.Domain.MaterialClassification;
+using Xunit;
+using FluentAssertions;
+using MAM.Materials.Domain;
 
 namespace MAM.Materials.UnitTests;
 

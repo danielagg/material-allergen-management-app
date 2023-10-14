@@ -1,3 +1,8 @@
+using Xunit;
+using FluentAssertions;
+using MAM.Materials.Domain;
+using MAM.Materials.Domain.Exceptions;
+
 namespace MAM.Materials.UnitTests;
 
 public class MaterialCodeTests

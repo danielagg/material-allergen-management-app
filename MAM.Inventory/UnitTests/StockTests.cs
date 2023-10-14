@@ -1,4 +1,5 @@
 using FluentAssertions;
+using Xunit;
 using MAM.Inventory.Domain.Exceptions;
 using MAM.Inventory.Domain;
 
