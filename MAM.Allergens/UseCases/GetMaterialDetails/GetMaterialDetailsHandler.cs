@@ -11,6 +11,8 @@ public class GetMaterialDetailsHandler : IRequestHandler<GetMaterialDetailsQuery
 
     public GetMaterialDetailsHandler(AllergensDbContext dbContext)
     {
+        ArgumentNullException.ThrowIfNull(dbContext);
+        
         _dbContext = dbContext;
     }
 

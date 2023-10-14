@@ -13,6 +13,8 @@ public class RemoveAllergenByNatureHandler : IRequestHandler<RemoveAllergenByNat
 
     public RemoveAllergenByNatureHandler(AllergensDbContext dbContext)
     {
+        ArgumentNullException.ThrowIfNull(dbContext);
+        
         _dbContext = dbContext;
     }
     

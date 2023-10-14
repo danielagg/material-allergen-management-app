@@ -13,6 +13,8 @@ public class AddAllergenByCrossContaminationHandler : IRequestHandler<AddAllerge
 
     public AddAllergenByCrossContaminationHandler(AllergensDbContext dbContext)
     {
+        ArgumentNullException.ThrowIfNull(dbContext);
+        
         _dbContext = dbContext;
     }
     

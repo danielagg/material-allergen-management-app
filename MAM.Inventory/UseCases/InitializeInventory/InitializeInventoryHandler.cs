@@ -10,6 +10,8 @@ public class InitializeInventoryHandler : IRequestHandler<InitializeInventoryCom
 
     public InitializeInventoryHandler(InventoryDbContext dbContext)
     {
+        ArgumentNullException.ThrowIfNull(dbContext);
+        
         _dbContext = dbContext;
     }
     

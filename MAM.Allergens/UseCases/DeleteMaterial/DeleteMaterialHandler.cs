@@ -11,6 +11,8 @@ public class DeleteMaterialHandler : IRequestHandler<DeleteMaterialCommand>
 
     public DeleteMaterialHandler(AllergensDbContext dbContext)
     {
+        ArgumentNullException.ThrowIfNull(dbContext);
+
         _dbContext = dbContext;
     }
     

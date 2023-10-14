@@ -13,6 +13,8 @@ public class AddAllergenByNatureHandler : IRequestHandler<AddAllergenByNatureCom
 
     public AddAllergenByNatureHandler(AllergensDbContext dbContext)
     {
+        ArgumentNullException.ThrowIfNull(dbContext);
+        
         _dbContext = dbContext;
     }
     

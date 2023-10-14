@@ -12,10 +12,15 @@ namespace MAM.Allergens.UseCases.CreateMaterial;
 public class CreateNewMaterialHandler : IRequestHandler<CreateNewMaterialCommand, MaterialAllergenDetailsDto>
 {
     private readonly AllergensDbContext _dbContext;
+    private readonly IMediator _mediator;
 
-    public CreateNewMaterialHandler(AllergensDbContext dbContext)
+    public CreateNewMaterialHandler(AllergensDbContext dbContext, IMediator mediator)
     {
+        ArgumentNullException.ThrowIfNull(dbContext);
+        ArgumentNullException.ThrowIfNull(mediator);
+        
         _dbContext = dbContext;
+        _mediator = mediator;
     }
 
     public async Task<MaterialAllergenDetailsDto> Handle(CreateNewMaterialCommand request,
@@ -43,7 +48,11 @@ public class CreateNewMaterialHandler : IRequestHandler<CreateNewMaterialCommand
         });
 
         return result.Match<MaterialAllergenDetailsDto>(
-            material => new MaterialAllergenDetailsDto(material),
+            material =>
+            {
+                // todo: publish NewMaterialCreated event
+                return new MaterialAllergenDetailsDto(material);
+            },
             exception => throw exception); // todo: throw...
     }
 
