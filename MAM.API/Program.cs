@@ -20,7 +20,8 @@ builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
-builder.Services.RegisterDependencyInjections();
+builder.Services.RegisterAllergenAssemblyDependencyInjections();
+builder.Services.RegisterInventoryAssemblyDependencyInjections();
 
 builder.Services.AddAuthentication().AddBearerToken(IdentityConstants.BearerScheme);
 builder.Services.AddAuthorizationBuilder();
@@ -58,13 +59,16 @@ app.MapControllers();
 
 app.MapIdentityApi<AuthenticatedUser>();
 
+// todo: refactor out from here
 using (var scope = app.Services.CreateScope())
 {
     var authenticationDbContext = scope.ServiceProvider.GetRequiredService<AuthenticatedUserDbContext>();
     var allergensDbContext = scope.ServiceProvider.GetRequiredService<AllergensDbContext>();
+    var inventoryDbContext = scope.ServiceProvider.GetRequiredService<InventoryDbContext>();
 
     authenticationDbContext.Database.Migrate();
     allergensDbContext.Database.Migrate();
+    inventoryDbContext.Database.Migrate();
 }
 
 app.Run();

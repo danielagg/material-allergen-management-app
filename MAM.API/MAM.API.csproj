@@ -21,7 +21,8 @@
     <ItemGroup>
       <ProjectReference Include="..\MAM.Shared\MAM.Shared.csproj" />
       <ProjectReference Include="..\MAM.Users\MAM.Users.csproj" />
-      <ProjectReference Include="..\MAM.Allergens\MAM.Allergens.csproj" />
+        <ProjectReference Include="..\MAM.Allergens\MAM.Allergens.csproj" />
+        <ProjectReference Include="..\MAM.Inventory\MAM.Inventory.csproj" />
     </ItemGroup>
 
     <ItemGroup>

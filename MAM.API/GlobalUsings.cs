@@ -6,3 +6,5 @@ global using MAM.Users;
 global using MediatR;
 global using MAM.Allergens.Infrastructure;
 global using MAM.Allergens.Domain;
+global using MAM.Inventory.Infrastructure;
+global using MAM.Inventory.Domain;
