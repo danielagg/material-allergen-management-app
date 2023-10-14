@@ -79,7 +79,7 @@ public class MaterialsController : ControllerBase
                 data.AllergensByCrossContamination
             ));
 
-            return Ok(material);
+            return CreatedAtAction("Get", material);
         }
         catch (Exception e)
         {

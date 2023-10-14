@@ -2,6 +2,9 @@ namespace MAM.Allergens.Domain;
 
 public record AllergenByNature(List<IndividualAllergen> Allergens)
 {
-    public void Add(IndividualAllergen newAllergen) => Allergens.Add(newAllergen);
-    public void Remove(IndividualAllergen existingAllergen) => Allergens.Remove(existingAllergen);
+    public AllergenByNature Append(IndividualAllergen newAllergen) =>
+        new(Allergens.Concat(new[] { newAllergen }).ToList());
+
+    public AllergenByNature Remove(IndividualAllergen existingAllergen) =>
+        new(Allergens.Except(new[] { existingAllergen }).ToList());
 }

@@ -11,22 +11,22 @@ scenarios:
 
     requests:
       - label: 01 - Call create new material API
-        url: ${ROOT_URL}/api/allergens
+        url: ${ROOT_URL}/api/materials
         method: POST
         body-file: Requests/CreateNewMaterialRequest.json
         extract-jsonpath:
-          created-material-code: $.materialCode
+          created-material-id: $.id
         assert-http-status:
-          - 200
+          - 201
 
       - label: 02 - Get newly created material
-        url: ${ROOT_URL}/api/allergens/${created-material-code}
+        url: ${ROOT_URL}/api/materials/${created-material-id}
         method: GET
         assert-http-status:
           - 200
 
       - label: 03 - Try to create duplicate of prev material
-        url: ${ROOT_URL}/api/allergens
+        url: ${ROOT_URL}/api/materials
         method: POST
         body-file: Requests/CreateNewMaterialRequest.json
         assert:
@@ -39,9 +39,15 @@ scenarios:
             expected-value: "A material with the code 'P12345' already exists therefore it cannot be created, again."
       
       - label: 04 - Add Soy as allergen by nature
-        url: ${ROOT_URL}/api/allergens/${created-material-code}/allergens-by-nature/add
+        url: ${ROOT_URL}/api/allergens/${created-material-id}/allergens-by-nature/add
         method: POST
         body-file: Requests/AddAllergenByNature_Soy.json
+        assert-http-status:
+          - 200
+            
+      - label: 05 - Assert Soy was added as allergen by nature
+        url: ${ROOT_URL}/api/materials/${created-material-id}
+        method: GET
         assert-http-status:
           - 200
         assert-jsonpath:
@@ -51,9 +57,9 @@ scenarios:
           - jsonpath: "$.allergensByNature[0]"
             validate: true
             expected-value: "Soy"
-          
-      - label: 05 - Try add Soy as allergen by nature again
-        url: ${ROOT_URL}/api/allergens/${created-material-code}/allergens-by-nature/add
+
+      - label: 06 - Try add Soy as allergen by nature again
+        url: ${ROOT_URL}/api/allergens/${created-material-id}/allergens-by-nature/add
         method: POST
         body-file: Requests/AddAllergenByNature_Soy.json
         assert:
@@ -64,11 +70,17 @@ scenarios:
         assert-jsonpath:
           - jsonpath: "$.message"
             expected-value: "Cannot add duplicate allergens: the allergen 'Soy' cannot appear multiple times."
-            
-      - label: 06 - Add Wheat as allergen by nature
-        url: ${ROOT_URL}/api/allergens/${created-material-code}/allergens-by-nature/add
+
+      - label: 07 - Add Wheat as allergen by nature
+        url: ${ROOT_URL}/api/allergens/${created-material-id}/allergens-by-nature/add
         method: POST
         body-file: Requests/AddAllergenByNature_Wheat.json
+        assert-http-status:
+          - 200
+
+      - label: 08 - Assert Wheat was added as allergen by nature
+        url: ${ROOT_URL}/api/materials/${created-material-id}
+        method: GET
         assert-http-status:
           - 200
         assert-jsonpath:
@@ -82,10 +94,16 @@ scenarios:
             validate: true
             expected-value: "Wheat"
 
-      - label: 07 - Remove Wheat as allergen by nature
-        url: ${ROOT_URL}/api/allergens/${created-material-code}/allergens-by-nature/remove
+      - label: 09- Remove Wheat as allergen by nature
+        url: ${ROOT_URL}/api/allergens/${created-material-id}/allergens-by-nature/remove
         method: POST
         body-file: Requests/AddAllergenByNature_Wheat.json
+        assert-http-status:
+          - 200
+
+      - label: 09 - Assert Wheat was removed as allergen by nature
+        url: ${ROOT_URL}/api/materials/${created-material-id}
+        method: GET
         assert-http-status:
           - 200
         assert-jsonpath:
@@ -96,8 +114,8 @@ scenarios:
             validate: true
             expected-value: "Soy"
 
-      - label: 08 - Try remove Wheat as allergen by nature again
-        url: ${ROOT_URL}/api/allergens/${created-material-code}/allergens-by-nature/remove
+      - label: 10 - Try remove Wheat as allergen by nature again
+        url: ${ROOT_URL}/api/allergens/${created-material-id}/allergens-by-nature/remove
         method: POST
         body-file: Requests/AddAllergenByNature_Wheat.json
         assert:
@@ -108,9 +126,9 @@ scenarios:
         assert-jsonpath:
           - jsonpath: "$.message"
             expected-value: "Cannot remove not present allergen: the allergen 'Wheat' cannot be removed, as it's not present in the current set of allergens."
-            
+
       - label: 99 - Delete newly created material
-        url: ${ROOT_URL}/api/allergens/${created-material-code}
+        url: ${ROOT_URL}/api/materials/${created-material-id}
         method: DELETE
         assert:
           - assume-success: true
@@ -118,4 +136,4 @@ scenarios:
               - ^200$
             not: false
             regexp: true
-            subject: http-code            
+            subject: http-code

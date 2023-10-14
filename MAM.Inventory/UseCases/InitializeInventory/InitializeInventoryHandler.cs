@@ -20,7 +20,7 @@ public class InitializeInventoryHandler : INotificationHandler<NewMaterialCreate
     public async Task Handle(NewMaterialCreated notification, CancellationToken cancellationToken)
     {
         var unitOfMeasure = UnitOfMeasure.Create(notification.UnitOfMeasureCode, notification.UnitOfMeasureName);
-        var stock = Stock.CreateInitialStock(unitOfMeasure, notification.InitialStock);
+        var stock = Stock.CreateInitialStock(notification.Id, unitOfMeasure, notification.InitialStock);
 
         await _dbContext.Stocks.AddAsync(stock, cancellationToken);
         await _dbContext.SaveChangesAsync(cancellationToken);

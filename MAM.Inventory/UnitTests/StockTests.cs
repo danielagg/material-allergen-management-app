@@ -48,7 +48,7 @@ public class StockTests
     {
         var unitOfMeasure = UnitOfMeasure.Create("kg", "Kilogram");
 
-        var action = () => Stock.CreateInitialStock(unitOfMeasure, -1);
+        var action = () => Stock.CreateInitialStock("Material1", unitOfMeasure, -1);
 
         action
             .Should()

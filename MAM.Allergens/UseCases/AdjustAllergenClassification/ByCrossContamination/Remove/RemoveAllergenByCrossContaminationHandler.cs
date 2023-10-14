@@ -20,9 +20,9 @@ public class RemoveAllergenByCrossContaminationHandler : IRequestHandler<RemoveA
     public async Task Handle(RemoveAllergenByCrossContaminationCommand request, CancellationToken cancellationToken)
     {
         var allergenClassification = await _dbContext.AllergenClassifications
-            .SingleAsync(x => x.Id == request.MaterialId, cancellationToken);
+            .SingleOrDefaultAsync(x => x.MaterialId == request.MaterialId, cancellationToken);
 
-        if (allergenClassification == null)
+        if (allergenClassification is null)
             throw new AllergenClassificationDoesNotExistException();
 
         var allergenToRemove = new IndividualAllergen(request.AllergenByCrossContaminationToRemove);

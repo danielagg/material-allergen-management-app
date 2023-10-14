@@ -22,7 +22,7 @@ public class AddAllergenByNatureHandler : IRequestHandler<AddAllergenByNatureCom
         var allergenClassification = await _dbContext.AllergenClassifications
             .SingleAsync(x => x.MaterialId == request.MaterialId, cancellationToken);
 
-        if (allergenClassification == null)
+        if (allergenClassification is null)
             throw new AllergenClassificationDoesNotExistException();
         
         var allergenToAdd = new IndividualAllergen(request.NewAllergenByNature);

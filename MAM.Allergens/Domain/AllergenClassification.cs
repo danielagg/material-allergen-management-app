@@ -7,8 +7,8 @@ public class AllergenClassification : Entity
 {
     public string MaterialId { get; private set; } // todo: research this, EF needs private setter to generate prop as column
     
-    public AllergenByNature ByNatureAllergens { get; }
-    public AllergenByCrossContamination CrossContaminatingAllergens { get; }
+    public AllergenByNature ByNatureAllergens { get; private set; }
+    public AllergenByCrossContamination CrossContaminatingAllergens { get; private set; }
     
     // for EF - todo: double check this, if we still need a param-less ctor for EF
     protected AllergenClassification()
@@ -33,29 +33,25 @@ public class AllergenClassification : Entity
     public void AddNewAllergenByNature(IndividualAllergen allergen)
     {
         AssertNoDuplication(ByNatureAllergens.Allergens, allergen);
-        
-        ByNatureAllergens.Add(allergen);
+        ByNatureAllergens = ByNatureAllergens.Append(allergen);
     }
     
     public void RemoveExistingAllergenByNature(IndividualAllergen allergen)
     {
         AssertAllergenExists(ByNatureAllergens.Allergens, allergen);
-        
-        ByNatureAllergens.Remove(allergen);
+        ByNatureAllergens = ByNatureAllergens.Remove(allergen);
     }
     
     public void AddNewAllergenByCrossContamination(IndividualAllergen allergen)
     {
         AssertNoDuplication(CrossContaminatingAllergens.Allergens, allergen);
-        
-        CrossContaminatingAllergens.Add(allergen);
+        CrossContaminatingAllergens = CrossContaminatingAllergens.Append(allergen);
     }
     
     public void RemoveExistingAllergenByCrossContamination(IndividualAllergen allergen)
     {
         AssertAllergenExists(CrossContaminatingAllergens.Allergens, allergen);
-        
-        CrossContaminatingAllergens.Remove(allergen);
+        CrossContaminatingAllergens = CrossContaminatingAllergens.Remove(allergen);
     }
     
     private void AssertNoDuplication(List<IndividualAllergen> allergens, IndividualAllergen newAllergen)

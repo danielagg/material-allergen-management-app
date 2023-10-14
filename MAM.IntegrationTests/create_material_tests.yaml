@@ -11,7 +11,7 @@ scenarios:
 
     requests:
       - label: 01 - Try without MaterialType
-        url: ${ROOT_URL}/api/allergens
+        url: ${ROOT_URL}/api/materials
         method: POST
         body-file: Requests/CreateNewMaterialRequest_Invalid1.json
         assert:

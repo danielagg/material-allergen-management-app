@@ -5,6 +5,7 @@ namespace MAM.Inventory.Domain;
 
 public class Stock : Entity
 {
+    public string MaterialId { get; private set; }
     public UnitOfMeasure UnitOfMeasure { get; private set; }
     public decimal CurrentAvailableStock { get; private set; }
 
@@ -14,13 +15,14 @@ public class Stock : Entity
         
     }
 
-    private Stock(UnitOfMeasure unitOfMeasure, decimal initialStock) : base()
+    private Stock(string materialId, UnitOfMeasure unitOfMeasure, decimal initialStock) : base()
     {
+        MaterialId = materialId;
         UnitOfMeasure = unitOfMeasure;
         CurrentAvailableStock = initialStock;
     }
 
-    public static Stock CreateInitialStock(UnitOfMeasure unitOfMeasure, decimal initialStock)
+    public static Stock CreateInitialStock(string materialId, UnitOfMeasure unitOfMeasure, decimal initialStock)
     {
         if(unitOfMeasure is null)
             throw new MissingUnitOfMeasureException();
@@ -28,6 +30,6 @@ public class Stock : Entity
         if(initialStock < 0)
             throw new InvalidInitialStockException();
 
-        return new(unitOfMeasure, initialStock);
+        return new(materialId, unitOfMeasure, initialStock);
     }
 }
