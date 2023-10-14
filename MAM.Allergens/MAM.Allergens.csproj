@@ -24,8 +24,8 @@
 
 
   <ItemGroup>
-    <Folder Include="UseCases\ManageAllergenClassification\ByCrossContamination\" />
-    <Folder Include="UseCases\ManageAllergenClassification\ByNature\" />
+    <Folder Include="UseCases\AdjustAllergenClassification\ByCrossContamination\" />
+    <Folder Include="UseCases\AdjustAllergenClassification\ByNature\" />
   </ItemGroup>
 
 </Project>

@@ -19,6 +19,10 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MAM.Inventory", "MAM.Invent
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MAM.Inventory.UnitTests", "MAM.Inventory.UnitTests\MAM.Inventory.UnitTests.csproj", "{EBDAC685-64BB-4FC6-9378-44293D7DD8C0}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MAM.Materials", "MAM.Materials\MAM.Materials.csproj", "{B245B53D-69BD-4491-8B3D-5BEE06AD0C06}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MAM.Materials.UnitTests", "MAM.Materials.UnitTests\MAM.Materials.UnitTests.csproj", "{C763A731-4699-4D07-A054-1F58D638078F}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -61,5 +65,13 @@ Global
 		{EBDAC685-64BB-4FC6-9378-44293D7DD8C0}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{EBDAC685-64BB-4FC6-9378-44293D7DD8C0}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{EBDAC685-64BB-4FC6-9378-44293D7DD8C0}.Release|Any CPU.Build.0 = Release|Any CPU
+		{B245B53D-69BD-4491-8B3D-5BEE06AD0C06}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B245B53D-69BD-4491-8B3D-5BEE06AD0C06}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B245B53D-69BD-4491-8B3D-5BEE06AD0C06}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B245B53D-69BD-4491-8B3D-5BEE06AD0C06}.Release|Any CPU.Build.0 = Release|Any CPU
+		{C763A731-4699-4D07-A054-1F58D638078F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C763A731-4699-4D07-A054-1F58D638078F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C763A731-4699-4D07-A054-1F58D638078F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C763A731-4699-4D07-A054-1F58D638078F}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 EndGlobal

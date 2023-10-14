@@ -15,11 +15,9 @@ namespace MAM.Allergens.Infrastructure.DatabaseMigrations
         protected override void BuildModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
-            modelBuilder
-                .HasDefaultSchema("allergens")
-                .HasAnnotation("ProductVersion", "8.0.0-preview.2.23128.3");
+            modelBuilder.HasAnnotation("ProductVersion", "8.0.0-preview.2.23128.3");
 
-            modelBuilder.Entity("MAM.Allergens.Domain.Material", b =>
+            modelBuilder.Entity("MAM.Allergens.Domain.AllergenClassification", b =>
                 {
                     b.Property<string>("Id")
                         .HasColumnType("TEXT");
@@ -27,168 +25,56 @@ namespace MAM.Allergens.Infrastructure.DatabaseMigrations
                     b.Property<DateTime>("CreatedOn")
                         .HasColumnType("TEXT");
 
-                    b.Property<string>("TypeId")
+                    b.Property<string>("MaterialId")
                         .IsRequired()
                         .HasColumnType("TEXT");
 
                     b.HasKey("Id");
 
-                    b.HasIndex("TypeId");
-
-                    b.ToTable("Materials", "allergens");
+                    b.ToTable("AllergenClassifications");
                 });
 
-            modelBuilder.Entity("MAM.Allergens.Domain.MaterialClassification.MaterialType", b =>
+            modelBuilder.Entity("MAM.Allergens.Domain.AllergenClassification", b =>
                 {
-                    b.Property<string>("Id")
-                        .HasColumnType("TEXT");
-
-                    b.Property<string>("ApplicableFor")
-                        .IsRequired()
-                        .HasColumnType("TEXT");
-
-                    b.Property<DateTime>("CreatedOn")
-                        .HasColumnType("TEXT");
-
-                    b.Property<string>("Name")
-                        .IsRequired()
-                        .HasColumnType("TEXT");
-
-                    b.HasKey("Id");
-
-                    b.ToTable("MaterialTypes", "allergens");
-
-                    b.HasData(
-                        new
+                    b.OwnsOne("MAM.Allergens.Domain.AllergenByCrossContamination", "CrossContaminatingAllergens", b1 =>
                         {
-                            Id = "748ca8d1-9eb3-430b-bea5-1e4ddf585815",
-                            ApplicableFor = "RawMaterial;FinishedGood",
-                            CreatedOn = new DateTime(2023, 9, 3, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            Name = "Food"
-                        },
-                        new
-                        {
-                            Id = "6b8898cc-1ec3-4d7d-bd1c-e4d3890056ee",
-                            ApplicableFor = "FinishedGood",
-                            CreatedOn = new DateTime(2023, 9, 3, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            Name = "Beverage"
-                        },
-                        new
-                        {
-                            Id = "c61e1dc8-c257-4796-8423-7815051e0ca6",
-                            ApplicableFor = "PackagingMaterial",
-                            CreatedOn = new DateTime(2023, 9, 3, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            Name = "Manufacturer Part"
-                        },
-                        new
-                        {
-                            Id = "2cb9838e-8f77-4217-8558-55874ceef8ce",
-                            ApplicableFor = "PackagingMaterial",
-                            CreatedOn = new DateTime(2023, 9, 3, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            Name = "Simple Packaging Material"
-                        },
-                        new
-                        {
-                            Id = "9be1b154-8916-4ee7-9878-c00494fb01f2",
-                            ApplicableFor = "RawMaterial;FinishedGood;PackagingMaterial",
-                            CreatedOn = new DateTime(2023, 9, 3, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            Name = "Perishable"
-                        });
-                });
-
-            modelBuilder.Entity("MAM.Allergens.Domain.Material", b =>
-                {
-                    b.HasOne("MAM.Allergens.Domain.MaterialClassification.MaterialType", "Type")
-                        .WithMany()
-                        .HasForeignKey("TypeId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.OwnsOne("MAM.Allergens.Domain.AllergenClassification.AllergenByCrossContamination", "AllergensByCrossContamination", b1 =>
-                        {
-                            b1.Property<string>("MaterialId")
+                            b1.Property<string>("AllergenClassificationId")
                                 .HasColumnType("TEXT");
 
                             b1.Property<string>("Allergens")
                                 .IsRequired()
                                 .HasColumnType("TEXT");
 
-                            b1.HasKey("MaterialId");
+                            b1.HasKey("AllergenClassificationId");
 
-                            b1.ToTable("Materials", "allergens");
+                            b1.ToTable("AllergenClassifications");
 
                             b1.WithOwner()
-                                .HasForeignKey("MaterialId");
+                                .HasForeignKey("AllergenClassificationId");
                         });
 
-                    b.OwnsOne("MAM.Allergens.Domain.AllergenClassification.AllergenByNature", "AllergensByNature", b1 =>
+                    b.OwnsOne("MAM.Allergens.Domain.AllergenByNature", "ByNatureAllergens", b1 =>
                         {
-                            b1.Property<string>("MaterialId")
+                            b1.Property<string>("AllergenClassificationId")
                                 .HasColumnType("TEXT");
 
                             b1.Property<string>("Allergens")
                                 .IsRequired()
                                 .HasColumnType("TEXT");
 
-                            b1.HasKey("MaterialId");
+                            b1.HasKey("AllergenClassificationId");
 
-                            b1.ToTable("Materials", "allergens");
-
-                            b1.WithOwner()
-                                .HasForeignKey("MaterialId");
-                        });
-
-                    b.OwnsOne("MAM.Allergens.Domain.MaterialCode", "Code", b1 =>
-                        {
-                            b1.Property<string>("MaterialId")
-                                .HasColumnType("TEXT");
-
-                            b1.Property<string>("Value")
-                                .IsRequired()
-                                .HasColumnType("TEXT");
-
-                            b1.HasKey("MaterialId");
-
-                            b1.ToTable("Materials", "allergens");
+                            b1.ToTable("AllergenClassifications");
 
                             b1.WithOwner()
-                                .HasForeignKey("MaterialId");
+                                .HasForeignKey("AllergenClassificationId");
                         });
 
-                    b.OwnsOne("MAM.Allergens.Domain.MaterialName", "Name", b1 =>
-                        {
-                            b1.Property<string>("MaterialId")
-                                .HasColumnType("TEXT");
-
-                            b1.Property<string>("FullName")
-                                .IsRequired()
-                                .HasColumnType("TEXT");
-
-                            b1.Property<string>("ShortName")
-                                .IsRequired()
-                                .HasColumnType("TEXT");
-
-                            b1.HasKey("MaterialId");
-
-                            b1.ToTable("Materials", "allergens");
-
-                            b1.WithOwner()
-                                .HasForeignKey("MaterialId");
-                        });
-
-                    b.Navigation("AllergensByCrossContamination")
+                    b.Navigation("ByNatureAllergens")
                         .IsRequired();
 
-                    b.Navigation("AllergensByNature")
+                    b.Navigation("CrossContaminatingAllergens")
                         .IsRequired();
-
-                    b.Navigation("Code")
-                        .IsRequired();
-
-                    b.Navigation("Name")
-                        .IsRequired();
-
-                    b.Navigation("Type");
                 });
 #pragma warning restore 612, 618
         }

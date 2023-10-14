@@ -1,0 +1,2 @@
+set -ex
+ASPNETCORE_ENVIRONMENT=Development dotnet ef migrations add $1 -c MAM.Materials.Infrastructure.MaterialsDbContext --project ../MAM.Materials.csproj --startup-project ../../MAM.API -o Infrastructure/DatabaseMigrations
