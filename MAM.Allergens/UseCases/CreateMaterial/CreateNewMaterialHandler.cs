@@ -4,7 +4,6 @@ using MediatR;
 using Microsoft.EntityFrameworkCore;
 using MAM.Allergens.Domain.AllergenClassification;
 using MAM.Allergens.Domain.Exceptions;
-using MAM.Allergens.Domain.Inventory;
 using MAM.Allergens.Domain.MaterialClassification;
 using MAM.Allergens.UseCases.GetMaterialDetails;
 
@@ -26,8 +25,6 @@ public class CreateNewMaterialHandler : IRequestHandler<CreateNewMaterialCommand
 
         var materialCode = MaterialCode.Create(request.MaterialCode);
         var materialName = MaterialName.Create(request.ShortMaterialName, request.FullMaterialName);
-        var unitOfMeasure = UnitOfMeasure.Create(request.UnitOfMeasureCode, request.UnitOfMeasureName);
-        var stock = Stock.CreateInitialStock(unitOfMeasure, request.InitialStock);
         var materialType = await GetMaterialTypeAsync(request.MaterialTypeId, cancellationToken);
 
         var allergenByNature = new AllergenByNature(
@@ -37,7 +34,7 @@ public class CreateNewMaterialHandler : IRequestHandler<CreateNewMaterialCommand
             request.AllergensByCrossContamination.Select(a => new Allergen(a)).ToList());
         
         var result = Material
-            .Create(materialCode, materialName, materialType, stock, allergenByNature, allergenByCrossContamination);
+            .Create(materialCode, materialName, materialType, allergenByNature, allergenByCrossContamination);
 
         result.IfSucc(async material =>
         {

@@ -8,6 +8,7 @@ using MAM.Allergens.UseCases.ManageAllergenClassification.ByNature.Add;
 using MAM.Allergens.UseCases.ManageAllergenClassification.ByNature.Remove;
 using MAM.Allergens.UseCases.ManageAllergenClassification.ByCrossContamination.Add;
 using MAM.Allergens.UseCases.ManageAllergenClassification.ByCrossContamination.Remove;
+using MAM.Inventory.Domain.Exceptions;
 using MaterialAllergenManagementApp;
 
 namespace MAM.Controllers;

@@ -2,8 +2,6 @@
 using MAM.Shared.Domain;
 using MAM.Allergens.Domain.AllergenClassification;
 using MAM.Allergens.Domain.MaterialClassification;
-using MAM.Allergens.Domain.Inventory;
-using MAM.Allergens.Domain.Exceptions;
 
 namespace MAM.Allergens.Domain;
 
@@ -12,7 +10,6 @@ public class Material : Entity
     public MaterialCode Code { get; private set; }
     public MaterialName Name { get; private set; }
     public MaterialType Type { get; private set; }
-    public Stock Stock { get; private set; }
     public AllergenByNature AllergensByNature { get; private set; }
     public AllergenByCrossContamination AllergensByCrossContamination { get; private set; }
 
@@ -26,7 +23,6 @@ public class Material : Entity
         MaterialCode code,
         MaterialName name,
         MaterialType materialType,
-        Stock initialStock,
         AllergenByNature allergensByNature,
         AllergenByCrossContamination allergensByCrossContamination
     ) : base()
@@ -34,7 +30,6 @@ public class Material : Entity
         Code = code;
         Name = name;
         Type = materialType;
-        Stock = initialStock;
         AllergensByNature = allergensByNature;
         AllergensByCrossContamination = allergensByCrossContamination;
     }
@@ -43,12 +38,11 @@ public class Material : Entity
         MaterialCode code,
         MaterialName name,
         MaterialType materialType,
-        Stock stock,
         AllergenByNature allergensByNature,
         AllergenByCrossContamination allergensByCrossContamination
     )
     {
-        return new Material(code, name, materialType, stock, allergensByNature, allergensByCrossContamination);
+        return new Material(code, name, materialType, allergensByNature, allergensByCrossContamination);
     }
 
     // todo: these can be done better:

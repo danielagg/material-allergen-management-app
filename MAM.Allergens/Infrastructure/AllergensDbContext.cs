@@ -1,6 +1,4 @@
-using System.Text.Json;
 using Microsoft.EntityFrameworkCore;
-using MAM.Shared.Domain;
 using MAM.Allergens.Domain;
 using MAM.Allergens.Domain.MaterialClassification;
 using MAM.Allergens.Domain.AllergenClassification;
@@ -36,10 +34,6 @@ public class AllergensDbContext : DbContext
                 allergen.Property(a => a.Allergens).HasConversion(
                 v => string.Join(';', v.Select(vv => vv.Name)),
                 v => v.Split(';', StringSplitOptions.RemoveEmptyEntries).Select(a => new Allergen(a)).ToList());
-            });
-
-            e.OwnsOne(x => x.Stock, stock => {
-                stock.OwnsOne(s => s.UnitOfMeasure);
             });
         });
 

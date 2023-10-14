@@ -1,8 +1,8 @@
 using FluentAssertions;
-using MAM.Allergens.Domain.Exceptions;
-using MAM.Allergens.Domain.Inventory;
+using MAM.Inventory.Domain.Exceptions;
+using MAM.Inventory.Domain;
 
-namespace MAM.Allergens.UnitTests;
+namespace MAM.Inventory.UnitTests;
 
 public class StockTests
 {
