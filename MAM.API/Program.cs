@@ -29,6 +29,7 @@ builder.Services.AddAuthorizationBuilder();
 builder.Services.AddMediatR(cfg => {
     cfg.RegisterServicesFromAssembly(typeof(Program).Assembly);
     cfg.RegisterServicesFromAssembly(typeof(Material).Assembly);
+    cfg.RegisterServicesFromAssembly(typeof(Stock).Assembly);
 });
 
 builder.Services.AddDbContext<AuthenticatedUserDbContext>(x =>

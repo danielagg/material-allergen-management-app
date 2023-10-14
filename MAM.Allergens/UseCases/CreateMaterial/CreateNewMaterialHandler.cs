@@ -6,6 +6,7 @@ using MAM.Allergens.Domain.AllergenClassification;
 using MAM.Allergens.Domain.Exceptions;
 using MAM.Allergens.Domain.MaterialClassification;
 using MAM.Allergens.UseCases.GetMaterialDetails;
+using MAM.Shared.GlobalEvents;
 
 namespace MAM.Allergens.UseCases.CreateMaterial;
 
@@ -45,15 +46,18 @@ public class CreateNewMaterialHandler : IRequestHandler<CreateNewMaterialCommand
         {
             await _dbContext.Materials.AddAsync(material, cancellationToken);
             await _dbContext.SaveChangesAsync(cancellationToken);
+            
+            await _mediator.Publish(new NewMaterialCreated(
+                material.Id,
+                material.Name.FullName,
+                request.UnitOfMeasureCode,
+                request.UnitOfMeasureName,
+                request.InitialStock), cancellationToken);
         });
 
         return result.Match<MaterialAllergenDetailsDto>(
-            material =>
-            {
-                // todo: publish NewMaterialCreated event
-                return new MaterialAllergenDetailsDto(material);
-            },
-            exception => throw exception); // todo: throw...
+            material =>new MaterialAllergenDetailsDto(material),
+            exception => throw exception); // todo: big no-no
     }
 
     private async Task AssertNoMaterialWithTheSameMaterialCodeExistAsync(string requestedMaterialCode,
