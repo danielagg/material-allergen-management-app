@@ -7,11 +7,11 @@ using MAM.Shared.Domain;
 
 namespace MaterialAllergenManagementApp;
 
+// todo: this needs to be a proper API gateway (it orchestrates results from different 'services')
 public interface IGateway
 {
     Task<PaginatedResult<MainListDto>> GetMaterialsMainList(int? top, int? skip);
     Task<DetailsDto> GetMaterialDetail(string materialId);
-    
 }
 
 public class Gateway : IGateway

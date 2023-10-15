@@ -5,12 +5,12 @@ namespace MAM.Allergens.Domain;
 
 public class AllergenClassification : Entity
 {
-    public string MaterialId { get; private set; } // todo: research this, EF needs private setter to generate prop as column
-    
+    public string MaterialId { get; private set; }
+
     public AllergenByNature ByNatureAllergens { get; private set; }
     public AllergenByCrossContamination CrossContaminatingAllergens { get; private set; }
     
-    // for EF - todo: double check this, if we still need a param-less ctor for EF
+    // for EF (requires a param-less ctor)
     protected AllergenClassification()
     {
         

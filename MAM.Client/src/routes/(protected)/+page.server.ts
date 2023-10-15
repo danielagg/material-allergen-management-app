@@ -5,7 +5,7 @@ import { z } from 'zod';
 export const load = async (): Promise<MaterialPageData> => {
 	const form = await superValidate(createMaterialSchema);
 
-	const response = await fetch(`${env.PUBLIC_BACKEND_URI}/api/allergens`);
+	const response = await fetch(`${env.PUBLIC_BACKEND_URI}/api/materials`);
 	const materials = await response.json();
 
 	return { form, materials };
@@ -26,7 +26,7 @@ export const actions = {
 			allergensByCrossContamination: []
 		};
 
-		await fetch(`${env.PUBLIC_BACKEND_URI}/api/allergens`, {
+		await fetch(`${env.PUBLIC_BACKEND_URI}/api/materials`, {
 			method: 'POST',
 			headers: {
 				'Content-Type': 'application/json'

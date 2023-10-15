@@ -31,12 +31,12 @@ namespace MAM.Allergens.Infrastructure.DatabaseMigrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("AllergenClassifications");
+                    b.ToTable("AllergenClassifications", (string)null);
                 });
 
             modelBuilder.Entity("MAM.Allergens.Domain.AllergenClassification", b =>
                 {
-                    b.OwnsOne("MAM.Allergens.Domain.AllergenByCrossContamination", "CrossContaminatingAllergens", b1 =>
+                    b.OwnsOne("MAM.Allergens.Domain.AllergenClassification.ByNatureAllergens#MAM.Allergens.Domain.AllergenByNature", "ByNatureAllergens", b1 =>
                         {
                             b1.Property<string>("AllergenClassificationId")
                                 .HasColumnType("TEXT");
@@ -47,13 +47,13 @@ namespace MAM.Allergens.Infrastructure.DatabaseMigrations
 
                             b1.HasKey("AllergenClassificationId");
 
-                            b1.ToTable("AllergenClassifications");
+                            b1.ToTable("AllergenClassifications", (string)null);
 
                             b1.WithOwner()
                                 .HasForeignKey("AllergenClassificationId");
                         });
 
-                    b.OwnsOne("MAM.Allergens.Domain.AllergenByNature", "ByNatureAllergens", b1 =>
+                    b.OwnsOne("MAM.Allergens.Domain.AllergenClassification.CrossContaminatingAllergens#MAM.Allergens.Domain.AllergenByCrossContamination", "CrossContaminatingAllergens", b1 =>
                         {
                             b1.Property<string>("AllergenClassificationId")
                                 .HasColumnType("TEXT");
@@ -64,7 +64,7 @@ namespace MAM.Allergens.Infrastructure.DatabaseMigrations
 
                             b1.HasKey("AllergenClassificationId");
 
-                            b1.ToTable("AllergenClassifications");
+                            b1.ToTable("AllergenClassifications", (string)null);
 
                             b1.WithOwner()
                                 .HasForeignKey("AllergenClassificationId");

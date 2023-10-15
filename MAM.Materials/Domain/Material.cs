@@ -10,7 +10,7 @@ public class Material : Entity
     public MaterialName Name { get; private set; }
     public MaterialType Type { get; private set; }
 
-    // for EF - todo: double check this, if we still need a param-less ctor for EF
+    // for EF (requires a param-less ctor)
     protected Material()
     {
         

@@ -9,7 +9,7 @@ public class Stock : Entity
     public UnitOfMeasure UnitOfMeasure { get; private set; }
     public decimal CurrentAvailableStock { get; private set; }
 
-    // for EF
+    // for EF (requires a param-less ctor)
     protected Stock()
     {
         
